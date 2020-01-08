@@ -1,0 +1,42 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="row">
+
+      <card title="Agregar Rol">
+        <form (ngSubmit)="onSaveRol(f)" #f="ngForm">
+          <div class="row">
+            <div class="col-md-9 ">
+              <md-input-container class="md-icon-left">
+                <md-icon>style</md-icon>
+                <input mdInput placeholder="Nombre" name="nombre" id="nombre" uppercase [(ngModel)]="roles.nombre" required>
+              </md-input-container>
+              <md-input-container class="md-icon-left">
+                <md-icon>style</md-icon>
+                <input mdInput placeholder="Porcentaje" name="porcentaje" id="porcentaje" [(ngModel)]="roles.porcentaje" required type="number">
+              </md-input-container>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <button md-raised-button class="btnCancel" color="warn" type="button" (click)="cancel()">
+                Cancelar
+              </button>
+            </div>
+            <div class="col-md-6">
+              <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!(f.valid )"> Guardar Rol
+              </button>
+            </div>
+          </div>
+
+        </form>
+        <div class="custom-progress-bar" *ngIf="progress">
+          <md-progress-bar mode="indeterminate" color="warn"></md-progress-bar>
+        </div>
+      </card>
+
+    </div>
+  </div>
+</div>

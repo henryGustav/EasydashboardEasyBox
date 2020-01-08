@@ -1,0 +1,42 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<div class="col-md-10">
+    <card title="Ver Categoría">
+        <div class="row">
+            <div class="col-md-4 cat-thumb">
+                <img class="custom-img" [src]="url">
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col">
+                        <label>Categoría :</label>
+                        {{categories.title}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label> Descripción :</label>
+                        {{categories.shortDescription}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Creado  :</label>
+                        {{categories.createdAt}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Sub Categorías :</label>
+                        <div class="row sub-cat-row">
+                            <div class="badge-title" *ngFor="let sub of subCategories">
+                                <badge [color]="'warning'">
+                                    {{sub.title}}
+                                </badge>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </card>
+</div>

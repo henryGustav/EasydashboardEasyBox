@@ -1,0 +1,80 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<div class="custom-spin" *ngIf="loading">
+  <md-progress-spinner mode="indeterminate" color="primary"></md-progress-spinner>
+  <h5 class="loading-text">Cargando...</h5>
+</div>
+
+<card title="DEMO" *ngIf="!loading">
+  <form #f="ngForm">
+    <div class="row">
+      <div class="col">
+        <md-input-container class="md-icon-left">
+          <md-icon>local_offer</md-icon>
+          <input mdInput placeholder="Planificación" name="planificacion" uppercase [(ngModel)]="codPlanificacion" required>
+        </md-input-container>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-primary" (click)="cargarTareas(f)" [disabled]="!f.valid">
+          <em class="fa fa-check">&nbsp;&nbsp;Buscar</em>
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button *ngIf="tareasData.length>0" class="btn btn-primary" (click)="exportarData()" [disabled]="!f.valid">
+          <em class="fa fa-check">&nbsp;&nbsp;Exportar</em>
+        </button>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+  </form>
+</card>
+<div class="">
+  <table class="table table-striped" id="example" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+      <tr>
+        <th>Planificacion</th>
+        <th>
+          Ciclo
+        </th>
+        <th>
+          SubCiclo
+        </th>
+        <th>
+          Cod Tarea
+        </th>
+        <th>
+            Cod Inspector
+          </th>
+        <th>
+            Tipo Documento
+          </th>
+        <th>
+          Ruta Alfresco
+        </th>
+        <th>
+            Ruta Padre
+          </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tareasData; let i=index ">
+        <td>{{item.codPlanificacion}}</td>
+        <td>{{item.codInspeccion}}</td>
+        <td>{{item.nombreSubCiclo}}</td>
+        <td>{{item.codTarea}}</td>
+        <td>{{item.codInspector}}</td>
+        <td *ngIf="item.tipoAlfresco=='D'">Documento</td>
+        <td *ngIf="item.tipoAlfresco=='F'">Carpeta</td>
+        <td *ngIf="item.tipoAlfresco!='F' && item.tipoAlfresco!='D'"></td>
+        <td>{{item.rutaAlfresco}}</td>
+        <td>{{item.rutaParent}}</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

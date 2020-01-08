@@ -1,0 +1,45 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="col-md-8 offset-md-2">
+    <br><br>
+    <card title="Actualizar Impuesto">
+        <form (ngSubmit)="onUpdateTax(f)" #f="ngForm">
+            <div class="row">
+                <div class="offset-md-1 col-md-10">
+                    <md-input-container class="md-icon-left">
+                        <md-icon>assignment_late</md-icon>
+                        <input mdInput placeholder="Nombre" name="name" id="name" uppercase
+                               [(ngModel)]="tax.title">
+                    </md-input-container>
+                </div>
+            </div>
+            <div class="row">
+              <div class="offset-md-1 col-md-10">
+                <md-input-container class="md-icon-left">
+                  <md-icon>assignment_late</md-icon>
+                  <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="tax.codigo" required>
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+              <div class="offset-md-1 col-md-10">
+                <md-input-container class="md-icon-left">
+                  <md-icon>inbox</md-icon>
+                  <input mdInput placeholder="Porcentaje" type="number" name="porcentaje" id="porcentaje" [(ngModel)]="tax.porcentaje"
+                    required>
+                </md-input-container>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button md-raised-button class="btnCancel" color="warn" type="button" (click)="cancel()"> Cancelar
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!f.valid"> Actualizar Impuesto
+                    </button>
+                </div>
+            </div>
+        </form>
+    </card>
+</div>

@@ -1,0 +1,104 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<button md-raised-button color="accent" class="addButton" (click)="addProduct()">Agregar Nuevo Producto</button>
+<card title="Productos">
+  <div class="row">
+    <div class="col-md-1">
+      <label>Tienda :</label>
+    </div>
+    <div class="col-md-4" *ngIf="tiendas.length >0">
+      <md-select class="select-width" name="tienda" id="tienda" (ngModelChange)="onChangeTienda($event)" [ngModel]="idTienda">
+        <md-option [value]="-1">TODAS</md-option>
+        <md-option *ngFor="let r of tiendas" [value]="r._id">{{ r.title }}</md-option>
+      </md-select>
+    </div>
+  </div>
+  <br>
+  <div class="custom-spin" *ngIf="loading">
+    <md-progress-spinner mode="indeterminate" color="primary"></md-progress-spinner>
+    <h5 class="loading-text">Cargando...</h5>
+  </div>
+
+  <div class="custom-spin" *ngIf="arrayLength == 0 ">
+    <img class="custom-img" src="{{url}}">
+    <h5 class="nodata-text"> No Existen Productos ... </h5>
+  </div>
+
+  <div class="custom-spin" *ngIf="errorImg">
+    <img class="custom-img" src="{{errorImage}}">
+    <h5 class="error-text"> No se ha podido contactar ... !!! </h5>
+  </div>
+
+
+  <div class="" *ngIf="productData.length>0">
+    <table class="table table-striped" datatable [dtOptions]="dtOptions">
+      <thead>
+        <tr>
+          <th>
+            Código
+          </th>
+          <th>
+            Tienda
+          </th>
+          <th>
+            Nombre Producto
+          </th>
+          <th>
+            Categoría
+          </th>
+          <th>
+            Marca
+          </th>
+          <th>
+            Stock Total
+          </th>
+          <th>
+            Características
+          </th>
+          <th>
+            Editar
+          </th>
+          <th>
+            Ver
+          </th>
+          <th>
+            Eliminar
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of productData; let i=index ">
+          <td>{{item.codigo}}</td>
+          <td>{{item.tienda}}</td>
+          <td>{{item.title}}</td>
+          <td>{{item.shortDescription}}</td>
+          <td>{{item.brand}}</td>
+          <td>{{item.stockSize}}</td>
+          <td>
+            <button md-mini-fab color="secondary" (click)="onAddVariant(item._id, item.unityId)">
+              <md-icon>add</md-icon>
+            </button>
+          </td>
+          <td>
+            <button md-mini-fab color="primary" (click)="onEditProduct(item._id)">
+              <md-icon>create</md-icon>
+            </button>
+          </td>
+          <td>
+            <button md-mini-fab color="accent" (click)="onViewProduct(item._id)">
+              <md-icon>search</md-icon>
+            </button>
+          </td>
+
+          <td>
+            <button md-mini-fab color="warn" (click)="onDeleteProduct(item._id,i)">
+              <md-icon>delete</md-icon>
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</card>

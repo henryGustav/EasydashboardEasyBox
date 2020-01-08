@@ -1,0 +1,45 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="row">
+
+      <card title="Agregar Unidad">
+        <form (ngSubmit)="onSaveUnidad(f)" #f="ngForm">
+          <div class="row">
+            <div class="col-md-9 ">
+              <md-input-container class="md-icon-left">
+                <md-icon>assignment</md-icon>
+                <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="unidades.codigo" required>
+              </md-input-container>
+              <md-input-container class="md-icon-left">
+                <md-icon>style</md-icon>
+                <input mdInput placeholder="Nombre" name="title" id="title" uppercase [(ngModel)]="unidades.title" required>
+              </md-input-container>
+              <md-input-container class="mb-0">
+                <textarea mdInput placeholder="Descripción" rows="3" name="shortDescription" uppercase id="shortDescription" [(ngModel)]="unidades.shortDescription"
+                  required></textarea>
+              </md-input-container>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <button md-raised-button class="btnCancel" color="warn" type="button" (click)="cancel()">
+                Cancelar
+              </button>
+            </div>
+            <div class="col-md-6">
+              <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!f.valid"> Guardar Unidad
+              </button>
+            </div>
+          </div>
+
+        </form>
+        <div class="custom-progress-bar" *ngIf="progress">
+          <md-progress-bar mode="indeterminate" color="warn"></md-progress-bar>
+        </div>
+      </card>
+
+    </div>
+  </div>
+</div>

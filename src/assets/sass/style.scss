@@ -1,0 +1,13 @@
+@import 'variable';
+
+/deep/ {
+  @import 'structure';
+  @import 'typography';
+  @import 'helpers';
+  @import 'components/material-components';
+  @import 'components/ngxtable';
+  @import 'components/bootstrap';
+}
+:host /deep/ {
+  @import 'fonts';
+}

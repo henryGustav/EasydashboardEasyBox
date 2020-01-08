@@ -1,0 +1,57 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="text-right">
+  <button md-raised-button color="accent" class="addButton" (click)="addColor()">Agregar Nuevo Color</button>
+</div>
+<br>
+<table class="table table-striped" [mfData]="colorData" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+    <tr>
+      <th style="width: 40%" class="text-center">
+        <mfDefaultSorter by="codigo">Código</mfDefaultSorter>
+      </th>
+      <th style="width: 40%" class="text-center">
+        <mfDefaultSorter by="title">Nombre</mfDefaultSorter>
+      </th>
+      <th style="width: 40%" class="text-center">
+        <mfDefaultSorter by="colorCode">Color</mfDefaultSorter>
+      </th>
+      <th style="width: 40%" class="text-center">
+        <mfDefaultSorter by="estado">Estado</mfDefaultSorter>
+      </th>
+      <th style="width: 30%" class="text-center">
+        <mfDefaultSorter by="edit">Editar</mfDefaultSorter>
+      </th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center" *ngFor="let item of mf.data">
+      <td>{{item.codigo}}</td>
+      <td>{{item.title}}</td>
+      <td>
+        <md-icon [ngStyle]="{'background-color':item.colorCode}">circle</md-icon>
+      </td>
+      <td class="text-center">
+        <button md-mini-fab class="activo" (click)="onInactive(item)" *ngIf="item.estado == 1">
+          <md-icon>done</md-icon>
+        </button>
+        <button md-mini-fab class="inactivo" (click)="onActive(item)" *ngIf="item.estado == 0">
+          <md-icon>close</md-icon>
+        </button>
+      </td>
+      <td>
+        <button md-mini-fab color="primary" (click)="editColor(item._id)">
+          <md-icon>create</md-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+  </tfoot>
+</table>

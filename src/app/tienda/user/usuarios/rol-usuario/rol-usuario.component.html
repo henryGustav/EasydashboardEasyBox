@@ -1,0 +1,75 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<card title="Actualizar-Roles">
+  <div class="custom-spin" *ngIf="loading">
+    <md-progress-spinner mode="indeterminate" color="primary"></md-progress-spinner>
+    <h5 class="loading-text">Cargando...</h5>
+  </div>
+
+  <div class="custom-spin" *ngIf="errorImg">
+    <img class="custom-img" src="{{errorImage}}">
+    <h5 class="error-text"> No se ha logrado cargar la data !!! </h5>
+  </div>
+
+  <form (ngSubmit)="onSaveRoles(f)" #f="ngForm">
+    <table class="table table-striped" [mfData]="rolData" #mf="mfDataTable" [mfRowsOnPage]="5">
+      <thead>
+        <tr class="text-center">
+          <th class="text-center">
+          </th>
+          <th class="text-left">
+            <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+          </th>
+          <th class="text-center">
+              <mfDefaultSorter by="email">Email</mfDefaultSorter>
+            </th>
+          <th></th>
+          <th class="text-right">
+            <mfDefaultSorter by="porcentaje">Porcentaje</mfDefaultSorter>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-center" *ngFor="let item of mf.data; let i= index ">
+          <!--  -->
+          <td>
+            <md-checkbox [(ngModel)]="item.checked" [name]="i+'checked'">
+            </md-checkbox>
+          </td>
+          <td class="text-left">{{item.nombre}}</td>
+          <td class="text-left">
+              <input mdInput class="text-right" type="email" placeholder="%" [name]="i + 'email'" uppercase [(ngModel)]="item.email" [required]="item.checked">
+            </td>
+            <td class="text-left">
+                <label *ngIf='item.checked' class="input-error-material">*</label>
+              </td>
+          <td class="text-right">
+            <input mdInput class="text-right" type="number" placeholder="%" [name]="i + 'porcentaje'" uppercase [(ngModel)]="item.porcentaje" [required]="item.checked">
+          </td>
+          <td class="text-left">
+          <label *ngIf='item.checked' class="input-error-material">*</label>
+        </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="12">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <button md-raised-button class="cancelButton" color="warn" type="button" (click)="cancel()"> Cancelar
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!f.valid">Actualizar
+        </button>
+      </div>
+    </div>
+  </form>
+</card>

@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+.mat-dialog-container{
+	width: 166% !important;
+}
+
+.activo{
+  background: #12cc18;
+}
+
+.inactivo{
+  background: rgb(250, 23, 23);
+}

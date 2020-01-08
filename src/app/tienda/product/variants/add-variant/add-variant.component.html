@@ -1,0 +1,114 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<card title="Agregar Característica">
+  <form (ngSubmit)="onSaveVariant(f)" #f="ngForm">
+    <!-- size and Color -->
+    <div class="row margin-row">
+      <div class="col-md-6">
+        <md-icon>format_color_fill</md-icon>
+        <md-select placeholder="Seleccione Color" class="select-width" name="categoryId" id="categoryId" [(ngModel)]="productsVariant.idColor"
+          required>
+          <!--(ngModelChange)="onSelectColor($event)" -->
+          <md-option *ngFor="let color of colorData" [value]="color._id">{{ color.title }}</md-option>
+        </md-select>
+      </div>
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>insert_chart</md-icon>
+          <input mdInput placeholder="Código SKU" name="sku" id="sku" uppercase [(ngModel)]="productsVariant.sku">
+        </md-input-container>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>attach_money</md-icon>
+          <input mdInput placeholder="Precio" name="price" id="price" required [(ngModel)]="productsVariant.price" required>
+        </md-input-container>
+      </div>
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>add_shopping_cart</md-icon>
+          <input mdInput placeholder="Stock (Cantidad)" name="Quantity" id="Quantity" [(ngModel)]="productsVariant.stock" required>
+        </md-input-container>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-6">
+        <md-icon>format_color_fill</md-icon>
+        <md-select placeholder="Seleccione Tamaño" class="select-width" name="sizeId" id="sizeId" [(ngModel)]="productsVariant.idSize">
+          <md-option *ngFor="let size of sizeData" [value]="size._id">{{ size.title }}</md-option>
+        </md-select>
+
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>assignment_late</md-icon>
+          <input mdInput placeholder="Porcentaje de Oferta" type="number" name="offerPercentage" min="0" max="100" id="offerPercentage"
+            [(ngModel)]="productsVariant.offerPercentage" required>
+        </md-input-container>
+      </div>
+    </div>
+    <br>
+    <div class="row" *ngIf="productsVariant.offerPercentage>0">
+      <div class="col-md-6">
+        <label style="font-weight: 300;">Oferta Desde: </label>
+        <p-calendar id="txtFechaInicio" dateFormat="dd/mm/yy" name="fechaInicio" [(ngModel)]="fechaInicio" required [showTime]="true"
+          [showIcon]="true" hourFormat="24"></p-calendar>
+      </div>
+      <div class="col-md-6">
+        <label style="font-weight: 300;">Oferta Hasta: </label>
+        <p-calendar id="txtFechaFin" dateFormat="dd/mm/yy" name="fechaFin" [(ngModel)]="fechaFin" required [showTime]="true" [showIcon]="true"
+          hourFormat="24"></p-calendar>
+      </div>
+    </div>
+    <br>
+    <!--select Thumb -->
+    <div class="row">
+      <div class="col-md-7  upload-btn-wrapper">
+        <input id="file" class="img-upload-btn" type="file" (change)="readUrl($event)" ng2FileSelect [uploader]="uploader" accept="image/*"
+        />
+        <button class="btn btn-sm btn-warning cursor-pointer btn-upload-cover" type="button">
+          <i class="fa fa-upload"></i>&nbsp;&nbsp; Seleccione Imágenes
+        </button>
+      </div>
+
+    </div>
+    <div class="row">
+      <a *ngFor="let url of images;let i=index ">
+        <div class="" *ngIf="i == 0">
+          <img class="media-object custom-img" [src]="url" alt="Image" />
+        </div>
+        <div class="" *ngIf="i > 0">
+          <img class="media-object small-thumb" [src]="url" alt="Image" />
+        </div>
+        <button class="btn btn-sm btn-danger image-remove" type="button" (click)="deleteImage(i)">
+          <em class="fa fa-times"></em>
+        </button>
+      </a>
+    </div>
+
+    <!-- Button row -->
+    <div class="row">
+      <div class="col-md-6">
+        <button md-raised-button class="cancelButton" color="warn" type="button" (click)="cancel()"> Cancelar
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!(imageUploaded && f.valid )"> Guardar Característica
+        </button>
+      </div>
+    </div>
+
+  </form>
+</card>

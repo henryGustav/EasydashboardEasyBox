@@ -1,0 +1,36 @@
+.addButton {
+  float: right;
+  margin-bottom: 10px;
+}
+
+.custom-spin {
+  margin-left: 36em;
+  margin-top: 9em;
+}
+
+.loading-text {
+  margin-left: 11px;
+  opacity: 0.6;
+}
+
+.custom-img {
+  height: 8em;
+  width: 8em;
+}
+
+.nodata-text {
+  margin-left: 8px;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+.error-text {
+  margin-left: -64px;
+  color: red;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+.select-width {
+  min-width: 150px !important;
+}

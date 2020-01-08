@@ -1,0 +1,29 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<card title="Actualizar Rol">
+  <form (ngSubmit)="onUpdateRol(f)" #f="ngForm">
+    <div class="row">
+      <md-input-container class="md-icon-left">
+        <md-icon>perm_identity</md-icon>
+        <input mdInput placeholder="Nombre" name="nombre" id="nombre" uppercase [(ngModel)]="roles.nombre">
+      </md-input-container>
+    </div>
+    <div class="row">
+      <md-input-container class="md-icon-left">
+        <md-icon>style</md-icon>
+        <input mdInput placeholder="Porcentaje" name="porcentaje" id="porcentaje" uppercase [(ngModel)]="roles.porcentaje" required
+          type="number">
+      </md-input-container>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <button md-raised-button class="btnCancel" color="warn" type="button" (click)="cancel()"> Cancelar
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!(f.valid)"> Actualizar
+        </button>
+      </div>
+    </div>
+  </form>
+</card>

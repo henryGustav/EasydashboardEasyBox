@@ -1,0 +1,35 @@
+@import '../../../assets/sass/variable';
+
+:host {
+  align-items: center;
+  background: $footer-bg;
+  color: $footer-color;
+  display: flex;
+  font-size: .8rem;
+  height: $module-rem * 4;
+  justify-content: space-between;
+  width: 100%;
+  @media #{$max543} {
+    font-size: .7rem;
+  }
+
+  .logo{
+    height: 35px;
+  }
+
+  .copyright,
+  .version {
+    padding: 10px 22px;
+  }
+  .copyright {
+    @media #{$max543} {
+      padding-right: 0;
+    }
+  }
+  .version {
+    @media #{$max543} {
+
+    }
+  }
+
+}

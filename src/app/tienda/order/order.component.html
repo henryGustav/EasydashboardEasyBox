@@ -1,0 +1,82 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<br>
+
+<div class="custom-spin" *ngIf="loading">
+  <md-progress-spinner mode="indeterminate" color="primary"></md-progress-spinner>
+  <h5 class="loading-text">Cargando...</h5>
+</div>
+
+<div class="custom-spin" *ngIf="arrayLength == 0 ">
+  <img class="custom-img" src="{{url}}">
+  <h5 class="nodata-text"> No existe contenido ... </h5>
+</div>
+
+<div class="custom-spin" *ngIf="errorImg">
+  <img class="custom-img" src="{{errorImage}}">
+  <h5 class="error-text"> Ha ocurrido un error... !!! </h5>
+</div>
+
+<div class="" *ngIf="orderData.length>0">
+  <table class="table table-striped" datatable [dtOptions]="dtOptions">
+    <thead>
+      <tr>
+        <th class="text-center">
+          # Orden
+        </th>
+        <th class="text-center">
+          Empresario
+        </th>
+        <th class="text-center">
+          Fecha Pedido
+        </th>
+        <th class="text-center">
+          Total
+        </th>
+        <th class="text-center">
+          Estado
+        </th>
+        <th class="text-center">
+          Ver
+        </th>
+<th class="text-center">
+              PDF
+           </th>      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor="let item of orderData">
+        <td>{{item._id}}</td>
+        <td>{{item.user.name}}</td>
+        <td>{{item.createdAt}}</td>
+        <td>{{item.grandTotal}}</td>
+        <td>
+          <badge [color]="'success'" *ngIf="item.status == '4'">
+            ENTREGADA
+          </badge>
+          <badge [color]="'info'" *ngIf="item.status == '3'">
+            DESPACHADA
+          </badge>
+          <badge [color]="'warning'" *ngIf="item.status == '2'">
+            PENDIENTE
+          </badge>
+          <badge [color]="'warning'" *ngIf="item.status == '1'">
+            INGRESADA
+          </badge>
+          <badge [color]="'danger'" *ngIf="item.status == '5'">
+            CANCELADA
+          </badge>
+        </td>
+        <td>
+          <button md-mini-fab color="primary" (click)="viewOrder(item._id)">
+            <md-icon>search</md-icon>
+          </button>
+        </td>
+	 <td>
+              <button md-mini-fab color="success" (click)="onPrint(item._id)">
+                  <md-icon>print</md-icon>
+              </button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

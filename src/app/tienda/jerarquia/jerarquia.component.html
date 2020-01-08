@@ -1,0 +1,63 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="custom-spin" *ngIf="loading">
+  <md-progress-spinner mode="indeterminate" color="primary"></md-progress-spinner>
+  <h5 class="loading-text">Cargando...</h5>
+</div>
+
+<div class="custom-spin" *ngIf="errorImg">
+  <img class="custom-img" src="{{errorImage}}">
+  <h5 class="error-text"> No se ha logrado cargar la data !!! </h5>
+</div>
+<card title="Buscar Por Tipo de Rol">
+  <br/>
+  <div class="row">
+    <div class="col-md-12">
+      <md-select placeholder="Roles" class="select-width" name="idRol" id="idRol" [(ngModel)]="idRol" (ngModelChange)="onChange($event)">
+        <md-option *ngFor="let rol of rolData" [value]="rol._id">{{ rol.nombre }}</md-option>
+      </md-select>
+    </div>
+  </div>
+  <br/>
+  <div class="">
+    <table class="table table-striped" [mfData]="userData" #mf="mfDataTable" [mfRowsOnPage]="5">
+      <thead>
+        <tr class="text-center">
+          <th class="text-center">
+            <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+          </th>
+          <th class="text-center">
+            <mfDefaultSorter by="identificacion">Identificación</mfDefaultSorter>
+          </th>
+          <th class="text-center">
+            <mfDefaultSorter by="email">Email</mfDefaultSorter>
+          </th>
+          <th class="text-center">
+            <mfDefaultSorter by="view">Ver Equipo</mfDefaultSorter>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-center" *ngFor="let item of mf.data">
+          <!--  -->
+          <td class="text-center">{{item.name}}</td>
+          <td class="text-center">{{item.identificacion}}</td>
+          <td class="text-center">{{item.email}}</td>
+          <td>
+            <button md-mini-fab color="accent" (click)="onViewEquipo(item._id, item.id_role)">
+              <md-icon>search</md-icon>
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="12">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</card>

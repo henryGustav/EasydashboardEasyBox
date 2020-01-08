@@ -1,0 +1,65 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<button md-raised-button color="accent" class="addButton" (click)="addUsuario()">Agregar Nuevo Usuario</button>
+
+<div class="custom-spin" *ngIf="loading">
+  <md-progress-spinner mode="indeterminate" color="primary"></md-progress-spinner>
+  <h5 class="loading-text">Cargando...</h5>
+</div>
+
+<div class="custom-spin" *ngIf="errorImg">
+  <img class="custom-img" src="{{errorImage}}">
+  <h5 class="error-text"> No se ha logrado cargar la data !!! </h5>
+</div>
+
+<div class="" *ngIf="userData.length>0">
+  <table class="table table-striped" datatable [dtOptions]="dtOptions">
+    <thead>
+      <tr class="text-center">
+        <th class="text-center">
+          Nombre
+        </th>
+        <th class="text-center">
+          Identificación
+        </th>
+        <th class="text-center">
+          Email
+        </th>
+        <th>
+          Editar
+        </th>
+        <th>
+          Ver
+        </th>
+        <th>
+          Roles
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor="let item of userData">
+        <!--  -->
+        <td class="text-center">{{item.name}}</td>
+        <td class="text-center">{{item.identificacion}}</td>
+        <td class="text-center">{{item.email}}</td>
+
+        <td>
+          <button md-mini-fab color="primary" (click)="onEditUsuario(item._id)">
+            <md-icon>create</md-icon>
+          </button>
+        </td>
+        <td>
+          <button md-mini-fab color="accent" (click)="onViewUsuario(item._id)">
+            <md-icon>search</md-icon>
+          </button>
+        </td>
+
+        <td>
+          <button md-mini-fab color="warn" (click)="onEditRole(item._id)">
+            <md-icon>edit</md-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

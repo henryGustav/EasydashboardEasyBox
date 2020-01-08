@@ -1,0 +1,39 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<div class="col-md-10">
+    <card title="Ver Unidad">
+        <div class="row">
+            <div class="col-md-8">
+                    <div class="row">
+                            <div class="col">
+                                <label>Codigo :</label>
+                                {{unidad.codigo}}
+                            </div>
+                        </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Unidad :</label>
+                        {{unidad.title}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label> Descripción :</label>
+                        {{unidad.shortDescription}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Tamaños :</label>
+                        <div class="row sub-cat-row">
+                            <div class="badge-title" *ngFor="let sub of subUnidades">
+                                <badge [color]="'warning'">
+                                    {{sub.title}}
+                                </badge>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </card>
+</div>

@@ -1,0 +1,251 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="col-md-12 ">
+  <br>
+  <div class="row">
+    <button (click)="onPrint()" name="btnImprimir" class="btn btn-info btn-nl">
+      <span class="glyphicon glyphicon-print"></span>
+      Descargar
+    </button>
+    <br>
+  </div>
+  <br>
+  <card title="Orden">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+          <div class="col">
+            <label>Orden Id:</label>
+            {{order._id}}
+          </div>
+          <!--col-->
+        </div>
+        <!--row-->
+        <div class="row">
+          <div class="col orderDetail">
+            <label>Orden Fecha :</label>
+            {{order.createdAt}}
+          </div>
+          <!--col-->
+        </div>
+        <!--row-->
+        <div class="row">
+          <div class="col orderDetail">
+            <label>Estado:</label>
+            <badge [color]="'warning'" *ngIf="order.status == '1'">
+                INGRESADA
+              </badge>
+            <badge [color]="'success'" *ngIf="order.status == '4'">
+              ENTREGADA
+            </badge>
+            <badge [color]="'info'" *ngIf="order.status == '3'">
+              DESPACHADA
+            </badge>
+            <badge [color]="'warning'" *ngIf="order.status == '2'">
+              PENDIENTE
+            </badge>
+            <badge [color]="'danger'" *ngIf="order.status == '5'">
+              CANCELADA
+            </badge>
+
+            <md-select placeholder="Actualizar Estado" class="select-width" name="categoryId" id="categoryId" [(ngModel)]="updateStatus.status"
+              (ngModelChange)="onChange($event)">
+              <md-option value="1">Ingresada</md-option>
+              <md-option value="2">Pendiente</md-option>
+              <md-option value="3">Envíada</md-option>
+              <md-option value="4">Entregada</md-option>
+              <md-option value="5">Cancelada</md-option>
+
+
+            </md-select>
+          </div>
+          <!--col-->
+        </div>
+        <!--row-->
+
+      </div>
+      <!--col-->
+      <div class="col-md-4 text-right custom-add">
+        <label>
+          <u *ngIf="order.userType == 'EMP'">Empresario Detalles</u>
+          <u *ngIf="order.userType == 'CV'">Cliente Móvil</u>
+        </label>
+        <div class="row">
+          <div class="col">
+            <label>Nombre :</label>
+            <strong>{{order.user.name}}</strong>
+          </div>
+          <!--col-->
+        </div>
+        <!--row-->
+        <div class="row">
+          <div class="col">
+            <label>Email :</label> {{order.user.email}}
+          </div>
+          <!--col-->
+        </div>
+        <!--row-->
+        <div class="row">
+          <div class="col">
+            <label> No. Teléfono :</label> {{order.user.contactNumber}}
+          </div>
+          <!--col-->
+        </div>
+        <div class="row">
+          <div class="col">
+            <label> Identificación :</label> {{order.user.identificacion}}
+          </div>
+          <!--col-->
+        </div>
+        <!--row-->
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+    <br/>
+    <!-- Shipping Details -->
+    <card title="Pago & Dirección Cargos por envío">
+      <h5>
+        <u>Detalles dirección:-</u>
+      </h5>
+      <div class="row">
+        <div class="col-md-3">
+          <label>País :</label>
+          {{order.shippingDetails.state}}
+        </div>
+        <div class="col-md-3">
+          <label>Provincia :</label>
+          {{order.shippingDetails.country}}
+        </div>
+        <div class="col-md-3">
+          <label>Ciudad :</label>
+          {{order.shippingDetails.city}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label>Calle Principal :</label>
+          {{order.shippingDetails.principal_street}}
+        </div>
+        <div class="col-md-3">
+          <label>Calle Secundaria :</label>
+          {{order.shippingDetails.secondary_street}}
+        </div>
+        <div class="col-md-3">
+          <label>Código Postal :</label>
+          {{order.shippingDetails.pincode}}
+        </div>
+      </div>
+
+      <h5>
+        <u>Detalle del Pago:-</u>
+      </h5>
+      <div class="row">
+        <div class="col-md-3">
+          <label>Tipo Pago:</label>
+          <!--   {{order.paymentType}} || "NO Status" -->
+          EFECTIVO
+        </div>
+        <div class="col-md-3">
+          <label>Sub Total :</label>
+          ${{order.subTotal|number:'.2-2'}}
+        </div>
+        <div class="col-md-3">
+          <label>Monto a pagar:</label>
+          ${{order.grandTotal-order.deductedDiscount-order.couponAmount|number:'.2-2'}}
+        </div>
+        <!-- <div class="col-md-3">
+                   <label>Pin code :</label>
+                   {{shippingDetails.pincode}}
+                </div> -->
+      </div>
+    </card>
+    <!-- Shipping Details End -->
+
+    <!-- order Products Details -->
+    <card title="Orden  Detalle">
+      <div class="row">
+        <div class="col table-responsive">
+          <table class="table table-bordered mb-0">
+            <thead>
+              <th>SKU</th>
+              <th>Nombre</th>
+              <th>Color</th>
+              <th>Tamaño</th>
+              <th>Precio unitario</th>
+              <th>Cantidad</th>
+              <th>Monto Total</th>
+            </thead>
+            <tbody text-center>
+              <tr *ngFor="let item of order.cartItems">
+                <td>{{item.codigo}}</td>
+                <td>{{item.title}}</td>
+                <td> {{item.color.colorName}}</td>
+                <td>{{item.size.size}}</td>
+                <td>$ {{item.price| number:'.2-2'}}</td>
+                <td>{{item.quantity}}</td>
+                <td style="text-align: right">${{item.itemTotalPrice |number:'.2-2'}}</td>
+              </tr>
+              <tr class="total">
+                <td colspan="5"></td>
+                <td class="detail">
+                  <strong>SubTotal :</strong>
+                </td>
+                <td class="detail mount">${{order.subTotal| number:'.2-2'}}</td>
+              </tr>
+              <!--tr class="total">
+                            <td colspan="3"></td>
+                            <td class="detail"><strong>Cupón Aplicado:</strong></td>
+                            <td class="detail"> ${{order.deductedAmountByCoupon|number:'.2-2'}}</td>
+                        </tr-->
+              <tr class="total">
+                <td colspan="5"></td>
+                <td class="detail">
+                  <strong>Impuestos :</strong>
+                </td>
+                <td class="detail mount"> ${{order.taxAmount|number:'.2-2'}}</td>
+              </tr>
+              <tr class="total">
+                <td colspan="5"></td>
+                <td class="detail">
+                  <strong>Cargos por envíos :</strong>
+                </td>
+                <td class="detail mount"> ${{order.extraAmount|number:'.2-2'}}</td>
+              </tr>
+              <tr class="total" *ngIf="order.deductedDiscount || order.deductedDiscount > 0 ||order.couponAmount || order.couponAmount > 0">
+                <td colspan="5"></td>
+                <td class="detail">
+                  <strong>Total 1:</strong>
+                </td>
+                <td class="detail mount">${{order.subTotal + order.taxAmount + order.extraAmount|number:'.2-2'}}</td>
+              </tr>
+              <tr class="total" *ngIf="order.deductedDiscount || order.deductedDiscount > 0">
+                <td colspan="5"></td>
+                <td class="detail">
+                  <strong>Descuento Empresario ({{order.discountPercentage}}%) :</strong>
+                </td>
+                <td class="detail mount"> -${{order.deductedDiscount|number:'.2-2'}}</td>
+              </tr>
+              <tr class="total" *ngIf="order.couponAmount || order.couponAmount > 0">
+                <td colspan="5"></td>
+                <td class="detail">
+                  <strong>Cupón : ({{order.coupon}})</strong>
+                </td>
+                <td class="detail mount"> -${{order.couponAmount|number:'.2-2'}}</td>
+              </tr>
+              <tr class="total">
+                <td colspan="5"></td>
+                <td class="detail">
+                  <strong>Total :</strong>
+                </td>
+                <td class="detail mount">${{order.grandTotal-order.deductedDiscount-order.couponAmount|number:'.2-2'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!--col-->
+      </div>
+      <!--row-->
+    </card>
+  </card>
+</div>

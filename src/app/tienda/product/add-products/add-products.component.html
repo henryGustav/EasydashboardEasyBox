@@ -1,0 +1,184 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<card title="Agregar-Productos">
+  <form (ngSubmit)="onSaveProduct(f)" #f="ngForm">
+    <div class="row">
+      <div class="col-md-6">
+        <md-icon>shopping_cart</md-icon>
+        <md-select class="select-width" name="tienda" id="tienda" [(ngModel)]="products.idTienda" placeholder="Tienda"
+          required>
+          <md-option *ngFor="let r of tiendas" [value]="r._id">{{ r.title }}</md-option>
+        </md-select>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>edit</md-icon>
+          <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="products.codigo"
+            required>
+        </md-input-container>
+      </div>
+      <div class="col-md-6">
+          <md-input-container class="md-icon-left">
+            <md-icon>edit</md-icon>
+            <input mdInput placeholder="Nombre" name="title" id="title" uppercase [(ngModel)]="products.title" required>
+          </md-input-container>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <md-icon>style</md-icon>
+        <md-select placeholder="Categoría" class="select-width" name="categoryId" id="categoryId" [(ngModel)]="products.categoryId"
+          (ngModelChange)="onChange($event)">
+          <md-option *ngFor="let state of categoryData" [value]="state._id">{{ state.title }}</md-option>
+        </md-select>
+      </div>
+      <div class="col-md-6">
+        <md-icon>gesture</md-icon>
+        <md-select placeholder="Sub-Categoría" class="select-width" name="subCategoryId" id="subCategoryId" [(ngModel)]="products.subCategoryId">
+          <md-option *ngFor="let state of subCategoryData" [value]="state._id">{{ state.title }}</md-option>
+        </md-select>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <md-icon>spa</md-icon>
+        <md-select placeholder="Seleccione Marca" class="select-width" name="brandId" id="brandId" [(ngModel)]="products.brandId">
+          <md-option *ngFor="let brand of brandData" [value]="brand._id">{{ brand.title }}</md-option>
+        </md-select>
+      </div>
+
+      <div class="col-md-6">
+        <md-icon>format_color_fill</md-icon>
+        <md-select placeholder="Seleccione Color" class="select-width" name="colorId" id="colorId" [(ngModel)]="products.color">
+          <md-option *ngFor="let color of colorData" [value]="color._id">{{ color.title }}</md-option>
+        </md-select>
+      </div>
+
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-md-6">
+            <md-icon>format_color_fill</md-icon>
+            <md-select placeholder="Seleccione Unidad de Medida" class="select-width" name="unidadId" id="unidadId" [(ngModel)]="products.unityId" (ngModelChange)="onChangeUnidad($event)" required>
+              <md-option *ngFor="let unidad of unitData" [value]="unidad._id">{{ unidad.title }}</md-option>
+            </md-select>
+          </div>
+      <div class="col-md-6">
+        <md-icon>format_color_fill</md-icon>
+        <md-select placeholder="Seleccione Tamaño" class="select-width" name="sizeId" id="sizeId" [(ngModel)]="products.size" required>
+          <md-option *ngFor="let size of sizeData" [value]="size._id">{{ size.title }}</md-option>
+        </md-select>
+      </div>
+      
+    </div>
+    <br>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <md-input-container class="md-icon-left">
+              <md-icon>add_shopping_cart</md-icon>
+              <input mdInput type="number" placeholder="Stock (Cantidad)" name="Quantity" id="Quantity" [(ngModel)]="products.stockSize"
+                required>
+            </md-input-container>
+          </div>
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>attach_money</md-icon>
+          <input mdInput placeholder="Precio" type="number" name="price" id="price" [(ngModel)]="products.price"
+            required>
+        </md-input-container>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <md-input-container class="mb-0">
+          <textarea mdInput placeholder="Descripción Corta" rows="3" name="shortDescription" uppercase id="shortDescription"
+            [(ngModel)]="products.shortDescription" required></textarea>
+        </md-input-container>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-7  upload-btn-wrapper">
+        <input id="file" class="img-upload-btn" type="file" (change)="readUrl($event)" ng2FileSelect [uploader]="uploader"
+          accept="image/*" />
+        <button class="btn btn-sm btn-warning cursor-pointer btn-upload-cover" type="button">
+          <i class="fa fa-upload"></i>&nbsp;&nbsp; Seleccione Imagénes
+        </button>
+      </div>
+
+    </div>
+    <div class="row">
+      <a *ngFor="let url of images;let i=index ">
+        <div class="" *ngIf="i == 0">
+          <img class="media-object custom-img" [src]="url" alt="Image" />
+        </div>
+        <div class="" *ngIf="i > 0">
+          <img class="media-object small-thumb" [src]="url" alt="Image" />
+        </div>
+        <button class="btn btn-sm btn-danger image-remove" type="button" (click)="deleteImage(i)">
+          <em class="fa fa-times"></em>
+        </button>
+      </a>
+    </div>
+
+    <br />
+    <h5>
+      <u>Características Adicionales</u>
+    </h5>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-3">
+          <md-slide-toggle color="accent" [checked]="true" name="active" id="active" [(ngModel)]="products.active">
+            Activo
+          </md-slide-toggle>
+        </div>
+        <div class="col-md-3">
+          <md-slide-toggle color="accent" [checked]="true" name="new" id="new" [(ngModel)]="products.new">
+            Nuevo
+          </md-slide-toggle>
+        </div>
+        <div class="col-md-3">
+          <md-slide-toggle color="accent" [checked]="true" [(ngModel)]="products.sale" name="sale" id="sale">
+            Agotado
+          </md-slide-toggle>
+        </div>
+        <div class="col-md-3">
+          <md-slide-toggle color="accent" [checked]="true" [(ngModel)]="products.isFeatured" name="isFeatured" id="isFeatured">
+            Destacado
+          </md-slide-toggle>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <label>Descripción</label>
+        <ckeditor [(ngModel)]="products.description" name="fullDescription" uppercase id="fullDescription" required>
+        </ckeditor>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <button md-raised-button class="cancelButton" color="warn" type="button" (click)="cancel()"> Cancelar
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!(imageUploaded && f.valid )">
+          Guardar Producto
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+</card>

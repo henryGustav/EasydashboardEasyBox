@@ -1,0 +1,64 @@
+<!--section>
+  <card class="card-login">
+    <form [formGroup]="login" (ngSubmit)="onSubmit()">
+      <md-input-container>
+        <md-icon>account_circle</md-icon>
+        <input mdInput id="exampleInputIdentificacion1" type="identificacion" name="identificacion" placeholder="USUARIO" autocomplete="off"
+          formControlName="identificacion" required #identificacion>
+        <div *ngIf="formErrors.identificacion" class="text-danger">
+          {{ formErrors.identificacion }}
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <md-icon size="40">lock</md-icon>
+        <input mdInput placeholder="CONTRASEÑA" id="exampleInputPassword1" type="password" name="password" formControlName="password"
+          required #password>
+        <div *ngIf="formErrors.password" class="text-danger">
+          {{ formErrors.password }}
+        </div>
+      </md-input-container>
+      <button md-raised-button color="primary" type="submit" [disabled]="!login.valid" class="login">INGRESO</button>
+    </form>
+  </card>
+</section-->
+<section>
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <div class="login100-pic js-tilt" data-tilt>
+          <img src="./assets/img/logo.png" alt="IMG">
+        </div>
+
+        <form class="login100-form validate-form" [formGroup]="login" (ngSubmit)="onSubmit()">
+          <span class="login100-form-title">
+            Administración
+          </span>
+          <div class="wrap-input100 validate-input">
+            <input mdInput class="input100" type="text" name="email" placeholder="Usuario" autocomplete="off" formControlName="identificacion" required #identificacion>
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </span>
+          </div>
+
+          <div class="wrap-input100 validate-input" data-validate="Password is required">
+            <input mdInput class="input100" type="password" name="pass" placeholder="Password" formControlName="password"
+            required #password>
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            </span>
+          </div>
+          <div class="container-login100-form-btn">
+            <button class="login100-form-btn" md-raised-button color="primary" type="submit" [disabled]="!login.valid">INGRESO</button>
+          </div>
+          <div class="text-center p-t-136">
+						<span class="txt2" href="#">
+							Fácil de encontrar, fácil de comprar
+						</span>
+					</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

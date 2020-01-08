@@ -1,0 +1,56 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="col-md-3"></div>
+<card title="Actualizar-Categoría">
+  <form (ngSubmit)="onUpdateCategory(f)" #f="ngForm">
+    <div class="row">
+      <md-input-container class="md-icon-left">
+        <md-icon>assignment</md-icon>
+        <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="categories.codigo" required>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <md-input-container class="md-icon-left">
+        <md-icon>perm_identity</md-icon>
+        <input mdInput placeholder="Nombre" name="nombre" id="nombre" uppercase [(ngModel)]="categories.title" required>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <div class="col-md-7  upload-btn-wrapper">
+        <input id="file" class="img-upload-btn" type="file" (change)="readUrl($event)" ng2FileSelect [uploader]="uploader" accept="image/*"
+        />
+        <button class="btn btn-sm btn-warning cursor-pointer btn-upload-cover" type="button">
+          <i class="fa fa-upload"></i>&nbsp;&nbsp; Seleccione una imagen
+        </button>
+      </div>
+      <div class="col-md-5">
+        <span class="imageFile">
+          <a>
+            <img class="media-object img-thumbnail custom-img" [src]="url" alt="Image" />
+          </a>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <md-input-container class="mb-0">
+        <textarea mdInput placeholder="Descripción" rows="5" name="shortDescription" id="shortDescription" uppercase [(ngModel)]="categories.shortDescription"></textarea>
+
+      </md-input-container>
+    </div>
+    <div class="row">
+      <!-- <div class="col-md-6 saveButton">
+              <button md-raised-button color="primary" type="submit"> Update Category</button>
+            </div> -->
+      <div class="col-md-6">
+        <button md-raised-button class="btnCancel" color="warn" type="button" (click)="cancel()"> Cancelar
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="cargando || !f.valid"> Actualizar Categoría
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+</card>

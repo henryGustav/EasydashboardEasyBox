@@ -1,0 +1,120 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+  <div class="tab">
+    <button class="tablinks" (click)="openCity($event, 'Web')" id="defaultOpen">Preferencias Web</button>
+    <button class="tablinks" (click)="openCity($event, 'Movil')">Preferencias Móvil</button>
+  </div>
+
+  <!-- web -->
+  <div id="Web" class="tabcontent">
+    <h3>Web</h3>
+
+    <div class="taxt-center">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 20%">
+              <mfDefaultSorter by="name">Código</mfDefaultSorter>
+            </th>
+            <th style="width: 70%" class="text-left" style="margin-left: 50px;">
+              <mfDefaultSorter by="codigo">Texto</mfDefaultSorter>
+            </th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="text-center" *ngFor="let preferencia of preferencias">
+            <td>{{preferencia.nombre}}</td>
+            <td>
+              <form (ngSubmit)="editPreference(preferencia._id,preferencia.valorTexto, forma)" #forma="ngForm">
+
+
+                <div class="form-group is-valid col-md-6 mb-3">
+                  <input class="form-control float-left" required style="width: 400px;" type="text" name="valor"
+                    [(ngModel)]="preferencia.valorTexto">
+                  <div *ngIf="!forma.valid" class="invalid-feedback" style="color: red;">
+                    El campo es requerido!!
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-form-label">&nbsp;</label>
+                  <!-- <div class="input-group col-md-2"> -->
+                    <button [disabled]="!forma.valid" md-mini-fab color="primary" type="submit">
+                      <md-icon>create</md-icon>
+                    </button>
+                  <!-- </div> -->
+                </div>
+
+
+              </form>
+            </td>
+
+          </tr>
+        </tbody>
+
+      </table>
+
+
+    </div>
+  </div>
+  <!-- Preferencias Movil -->
+  <div id="Movil" class="tabcontent">
+    <h3>Móvil</h3>
+    <div class="">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-center" style="width: 20%">
+              <mfDefaultSorter by="name">Código</mfDefaultSorter>
+            </th>
+            <th style="width: 70%" class="text-left" style="margin-left: 50px;">
+              <mfDefaultSorter by="codigo">Texto</mfDefaultSorter>
+            </th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="text-center" *ngFor="let preferencia of preferenciasMovil">
+            <td>{{preferencia.nombre}}</td>
+            <td>
+              <form (ngSubmit)="editPreference(preferencia._id,preferencia.valorTexto, forma)" #forma="ngForm">
+
+
+                <div class="form-group is-valid col-md-6 mb-3">
+                  <input class="form-control float-left" required style="width: 400px;" type="text" name="valor"
+                    [(ngModel)]="preferencia.valorTexto">
+                  <div *ngIf="!forma.valid" class="invalid-feedback" style="color: red;">
+                    El campo es requerido!!
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label class="col-form-label">&nbsp;</label>
+                  <!-- <div class="input-group col-md-8"> -->
+                    <button [disabled]="!forma.valid" md-mini-fab color="primary" type="submit">
+                      <md-icon>create</md-icon>
+                    </button>
+                  <!-- </div> -->
+                </div>
+
+
+              </form>
+            </td>
+
+          </tr>
+        </tbody>
+
+      </table>
+
+
+    </div>
+  </div>
+
+
+
+<!-- <breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+ -->

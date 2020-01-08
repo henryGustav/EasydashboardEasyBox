@@ -1,0 +1,184 @@
+@import "~@angular/material/theming";
+
+// Material palettes:
+// $mat-red, $mat-pink, $mat-purple, $mat-deep-purple, $mat-indigo, $mat-blue, $mat-light-blue, $mat-cyan, $mat-teal,
+// $mat-green, $mat-light-green, $mat-lime, $mat-yellow, $mat-amber, $mat-orange, $mat-deep-orange, $mat-brown,
+// $mat-grey, $mat-blue-grey
+
+//Main palette
+$palette: (
+  50: #e4e6e8,
+  100: #bdc1c5,
+  200: #91979e,
+  300: #646d77,
+  400: #434e59,
+  500: #3f92e5,
+  600: #1886f3,
+  700: #0a7af1,
+  800: #0976f3,
+  900: #227bf0,
+  A100: #5c9dff,
+  A200: #297eff,
+  A400: #0062f5,
+  A700: #0021f5,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #ffffff,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff
+  )
+);
+@function main-color($key: $palette) {
+  @return map-get($palette, $key);
+}
+@function main-contrast($key: $palette) {
+  @return map-get(map-get($palette, contrast), $key);
+}
+
+//Accent palette
+$accent-palette: (
+  50: #fde8ef,
+  100: #f9c6d7,
+  200: #f6a0bd,
+  300: #f279a2,
+  400: #ef5d8e,
+  500: #f38c17,
+  //#ec407a,
+    600: #ea3a72,
+  700: #e73267,
+  800: #e42a5d,
+  900: #df1c4a,
+  A100: #ffffff,
+  A200: #ffe0e7,
+  A400: #ffadbe,
+  A700: #ff94aa,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
+);
+@function accent-color($key: $accent-palette) {
+  @return map-get($accent-palette, $key);
+}
+@function accent-contrast($key: $accent-palette) {
+  @return map-get(map-get($accent-palette, contrast), $key);
+}
+
+$success-color: #008000;
+$info-color: #00bfff;
+$warning-color: #ff8c00;
+$danger-color: #dc143c;
+
+//Main
+$mainBg: #fff;
+$main-fs: 14px;
+$main-ff: "Open Sans", sans-serif;
+$main-fw: 400;
+$module: 11px;
+$main-lh: ($module * 2 / $main-fs);
+$module-rem: ($module / $main-fs) * 1rem;
+
+//Second
+$second-ff: "Nunito Sans", sans-serif;
+
+//Animationng serve
+$animation: ease-in-out;
+
+//Media
+$max543: only screen and
+  (
+    max-width: 543px
+  );
+$min544: only screen and
+  (
+    min-width: 544px
+  );
+$max767: only screen and
+  (
+    max-width: 767px
+  );
+$min768: only screen and
+  (
+    min-width: 768px
+  );
+$max991: only screen and
+  (
+    max-width: 991px
+  );
+$min992: only screen and
+  (
+    min-width: 992px
+  );
+$max1199: only screen and
+  (
+    max-width: 1199px
+  );
+$min1200: only screen and
+  (
+    min-width: 1200px
+  );
+
+//Headers
+$headers-ff: $second-ff;
+$headers-fw: 500;
+
+//Top navbar
+$navbar-height: $module-rem * 6;
+$navbar-bg: main-color(400);
+$navbar-color: main-contrast(700);
+$navbar-icon-color: main-contrast(700);
+$navbar-icon-color-hover: accent-color(500);
+$navbar-dropdown-bg: main-color(400);
+$navbar-dropdown-bg-hover: accent-color(500);
+$navbar-dropdown-color: main-contrast(500);
+$navbar-dropdown-color-hover: accent-contrast(500);
+$navbar-dropdown-dark-bg: main-color(600);
+
+//Sidebar
+$sidebar-bg: main-color(400);
+$sidebar-accent: accent-color(500);
+$sidebar-width: $module-rem * 22;
+$sidebar-compress-width: $module-rem * 5;
+
+//Footer
+$footer-bg: main-color(50);
+$footer-color: main-contrast(50);
+
+//Card
+$card-header-bg: main-color(300);
+$card-header-color: main-contrast(300);
+
+//Preloader
+$loader-overlay-bg: #fff;
+$loader-colors: (
+  1: main-color(100),
+  2: main-color(300),
+  3: main-color(400),
+  4: main-color(400),
+  5: main-color(900)
+);
+@function loader-colors($key: $loader-colors) {
+  @return map-get($loader-colors, $key);
+}

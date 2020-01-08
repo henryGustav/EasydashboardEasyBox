@@ -1,0 +1,30 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<card title="User Detail">
+    <div class="row">
+        <div class="col-md-6">
+            <label>Name : </label>&nbsp;{{user.name}}
+            <br/>
+            <label>Contact Number : </label>&nbsp;{{user.contactNumber}}
+            <br/>
+            <label>Address :</label>&nbsp; {{user.address}}
+            <br/>
+            <label>Pin Code :</label>&nbsp;{{user.pincode}}
+            <br/>
+            <label>DOB :</label>&nbsp; {{user.birthDate}}
+            <br/>
+            <label>Gender :&nbsp;
+                <img class="media-object gender gender-img" *ngIf="user.gender == 'male'" [src]="male">
+                <img class="media-object gender gender-img-girl" *ngIf="user.gender == 'female'" [src]="female">
+            </label>
+        </div><!-- col -->
+        <div class="col-md-6">
+            <div *ngIf="user.imageUrl">
+                <img class="cat-thumb" [src]="user.imageUrl">
+            </div>
+            <div *ngIf="!user.imageUrl">
+                <img class="cat-thumb" [src]="userImage">
+            </div>
+        </div>
+    </div><!--row-->
+</card>

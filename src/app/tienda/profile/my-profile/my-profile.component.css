@@ -1,0 +1,47 @@
+.select {
+    margin-top: 15px;
+}
+
+.phone-icon {
+    margin-top: 19px;
+    margin-left: 3px;
+    max-width: 31px !important;
+}
+
+.input-dob {
+    margin-left: 53px;
+}
+
+.custom-radio {
+    margin-left: 13px;
+}
+
+.gender-row {
+    margin-top: 0px;
+    margin-left: 10px;
+}
+
+.gender-label {
+    margin-top: 19px;
+}
+
+.gender-img {
+  height: 50px;
+  width: 55px;
+  margin-left: -6px;
+}
+
+.gender-img-girl {
+  height: 43px;
+  width: 50px;
+  margin-left: -6px;
+  padding-bottom: 5px;
+}
+
+.mat-radio-container {
+    background-color: red !important;
+}
+
+.saveButton {
+    float: right;
+}

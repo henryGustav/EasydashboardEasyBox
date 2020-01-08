@@ -1,0 +1,159 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<card title="Agregar-Usuario">
+  <form (ngSubmit)="onSaveUsuario(f)" #f="ngForm">
+
+    <div class="row">
+      <div class="col-md-9 ">
+        <div class="upload-btn-wrapper">
+          <input id="file" class="img-upload-btn" type="file" (change)="readUrl($event)" ng2FileSelect [uploader]="uploader" accept="image/*"
+          />
+          <button class="btn btn-block btn-warning cursor-pointer btn-upload-cover" type="button">
+            <i class="fa fa-upload"></i>&nbsp;&nbsp; Seleccione una imagen
+          </button>
+        </div>
+        <md-input-container class="md-icon-left">
+          <md-icon>credit_card</md-icon>
+          <input mdInput placeholder="Identificación" name="identificacion" id="identificacion" uppercase [(ngModel)]="usuario.identificacion"
+            required>
+        </md-input-container>
+        <md-input-container class="md-icon-left">
+          <md-icon>style</md-icon>
+          <input mdInput placeholder="Nombre" name="nombre" id="nombre" uppercase [(ngModel)]="usuario.nombre" required>
+        </md-input-container>
+        <md-input-container class="md-icon-left">
+          <md-icon>style</md-icon>
+          <input mdInput placeholder="Apellido" name="apellido" id="apellido" uppercase [(ngModel)]="usuario.apellido" required>
+        </md-input-container>
+      </div>
+      <div class="col-md-3">
+        <span class="imageFile">
+          <a>
+            <img class="media-object img-thumbnail custom-img" [src]="url" alt="Image" />
+          </a>
+        </span>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>phone</md-icon>
+          <input mdInput placeholder="Teléfono" name="telefono" id="telefono" uppercase [(ngModel)]="usuario.address.contactNumber"
+            required>
+        </md-input-container>
+      </div>
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>phone_iphone</md-icon>
+          <input mdInput placeholder="Celular" name="celular" id="celular" uppercase [(ngModel)]="usuario.address.celularNumber" required>
+        </md-input-container>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6 md-icon-left">
+        <label [ngClass]="{'label-material float-input': !(fecNacimiento.valid && (fecNacimiento.dirty || fecNacimiento.touched)),
+          'label-material-error float-input':(fecNacimiento.valid && (fecNacimiento.dirty || fecNacimiento.touched))}" for="nacimiento">Fecha Nacimiento: * </label>
+        <md-icon>date_range</md-icon>
+        <p-calendar id="nacimiento" dateFormat="dd/mm/yy" name="nacimiento" [(ngModel)]="fechaNacimiento" required [showTime]="false"
+          #fecNacimiento="ngModel" [monthNavigator]="true" [yearNavigator]="true" [showIcon]="true" placeholder="Fecha Nacimiento"
+          hourFormat="24" yearRange="1950:2018"></p-calendar>
+
+      </div>
+      <div class="col-md-6">
+          <md-select placeholder="Rol" class="select-width" name="rol" id="rol" [(ngModel)]="usuario.id_role" required >
+            <md-option *ngFor="let r of rolData" [value]="r._id">{{ r.nombre }}</md-option>
+          </md-select>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+          <md-select placeholder="Sexo" class="select-width" name="sexo" id="sexo" [(ngModel)]="usuario.gender" required>
+            <md-option *ngFor="let sexo of sexoData" [value]="sexo._id">{{ sexo.title }}</md-option>
+          </md-select>
+      </div>
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>email</md-icon>
+          <input mdInput placeholder="Email" name="email" id="email" uppercase [(ngModel)]="usuario.email" required>
+        </md-input-container>
+      </div>
+    </div>
+    <h5>
+      <u>Ubicación</u>
+    </h5>
+    <div class="row">
+      <div class="col-md-6">
+        <md-select placeholder="País" class="select-width" name="paisId" id="paisId" [(ngModel)]="usuario.address.stateCode" (ngModelChange)="onChange($event)"
+          required>
+          <md-option *ngFor="let pais of paisData" [value]="pais._id">{{ pais.title }}</md-option>
+        </md-select>
+      </div>
+
+      <div class="col-md-6">
+        <md-select placeholder="Provincias" class="select-width" name="provinciaId" id="provinciaId" [(ngModel)]="usuario.address.countryCode"
+          required>
+          <md-option *ngFor="let state of provinciasData" [value]="state._id">{{ state.title }}</md-option>
+        </md-select>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>person_pin_circle</md-icon>
+          <input mdInput placeholder="Ciudad" name="ciudad" id="ciudad" uppercase [(ngModel)]="usuario.address.city" required uppercase>
+        </md-input-container>
+      </div>
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>edit_location</md-icon>
+          <input mdInput placeholder="Calle Principal" name="principal" id="principal" required uppercase [(ngModel)]="usuario.address.principal_street"
+            required>
+        </md-input-container>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>edit_location</md-icon>
+          <input mdInput placeholder="Calle Secundaria" name="secundaria" id="secundaria" required uppercase [(ngModel)]="usuario.address.secondary_street"
+            required>
+        </md-input-container>
+      </div>
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>edit</md-icon>
+          <input mdInput placeholder="No. Calle" name="numero" id="numero" uppercase [(ngModel)]="usuario.address.homeNumber" required>
+        </md-input-container>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>edit_location</md-icon>
+          <input mdInput placeholder="Código Postal" name="codePostal" id="codePostal" required uppercase [(ngModel)]="usuario.address.pincode"
+            required>
+        </md-input-container>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-6">
+        <button md-raised-button class="cancelButton" color="warn" type="button" (click)="cancel()"> Cancelar
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!(imageUploaded && f.valid )"> Guardar Usuario
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+</card>

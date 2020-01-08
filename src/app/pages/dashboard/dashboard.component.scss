@@ -1,0 +1,52 @@
+.map-col {
+  card {
+    height: 100%;
+
+    /deep/ .card-wrap {
+      height: 100%;
+
+      .card-content {
+        height: 100%;
+      }
+    }
+  }
+}
+
+#map {
+  height: 100%;
+  min-height: 300px;
+}
+
+.custom-spin {
+  margin-left: 36em;
+  margin-top: 5em;
+  margin-bottom: 5em !important;
+}
+
+.loading-text {
+  margin-left: 11px;
+  opacity: 0.6;
+}
+
+.custom-img {
+  height: 8em;
+  width: 8em;
+}
+
+.nodata-text {
+  margin-left: 8px;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+.error-text {
+  margin-left: -64px;
+  color: red;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+canvas {
+	width: 150px;
+	height: 200px;
+}

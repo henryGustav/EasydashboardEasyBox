@@ -1,0 +1,41 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="col-md-3"></div>
+<card title="Actualizar-Categoría">
+  <form (ngSubmit)="onUpdateUnidad(f)" #f="ngForm">
+    <div class="row">
+      <md-input-container class="md-icon-left">
+        <md-icon>assignment</md-icon>
+        <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="unidades.codigo" required>
+      </md-input-container>
+    </div>
+    <div class="row">
+      <md-input-container class="md-icon-left">
+        <md-icon>perm_identity</md-icon>
+        <input mdInput placeholder="Nombre" name="nombre" id="nombre" uppercase [(ngModel)]="unidades.title" required>
+      </md-input-container>
+    </div>
+
+    <div class="row">
+      <md-input-container class="mb-0">
+        <textarea mdInput placeholder="Descripción" rows="5" name="shortDescription" id="shortDescription" uppercase [(ngModel)]="unidades.shortDescription"></textarea>
+
+      </md-input-container>
+    </div>
+    <div class="row">
+      <!-- <div class="col-md-6 saveButton">
+              <button md-raised-button color="primary" type="submit"> Update Unidad</button>
+            </div> -->
+      <div class="col-md-6">
+        <button md-raised-button class="btnCancel" color="warn" type="button" (click)="cancel()"> Cancelar
+        </button>
+      </div>
+      <div class="col-md-6">
+        <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!f.valid"> Actualizar Categoría
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+</card>

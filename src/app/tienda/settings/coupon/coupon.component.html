@@ -1,0 +1,62 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="text-right">
+  <button md-raised-button color="accent" class="addButton" (click)="addCoupon()">Agregar Nuevo Cupón</button>
+</div>
+<br>
+<table class="table table-striped" [mfData]="couponData" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+    <tr>
+      <th  class="text-center">
+        <mfDefaultSorter by="code">Código</mfDefaultSorter>
+      </th>
+      <th  class="text-center">
+        <mfDefaultSorter by="title">Nombre</mfDefaultSorter>
+      </th>
+      <th class="text-center">
+        <mfDefaultSorter by="description">Descripción</mfDefaultSorter>
+      </th>
+      <th class="text-center">
+        <mfDefaultSorter by="mount">Valor de Descuento</mfDefaultSorter>
+      </th>
+      <th class="text-center">
+        <mfDefaultSorter by="min-mount">Valor Mínimo de Venta</mfDefaultSorter>
+      </th>
+      <th class="text-center">
+        <mfDefaultSorter by="eliminar">Estado</mfDefaultSorter>
+      </th>
+      <th class="text-center">
+        <mfDefaultSorter by="editar">Editar</mfDefaultSorter>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center" *ngFor="let item of mf.data">
+        <td>{{item.code}}</td>
+      <td>{{item.title}}</td>
+      <td>{{item.description}}</td>
+      <td>${{item.mount}}</td>
+      <td>${{item.minMount}}</td>
+      <td class="text-center">
+        <button md-mini-fab class="activo" (click)="onInactive(item)" *ngIf="item.estado == 1">
+          <md-icon>done</md-icon>
+        </button>
+        <button md-mini-fab class="inactivo" (click)="onActive(item)" *ngIf="item.estado == 0">
+          <md-icon>close</md-icon>
+        </button>
+      </td>
+      <td>
+        <button md-mini-fab color="primary" (click)="editCoupon(item._id)">
+          <md-icon>create</md-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+  </tfoot>
+</table>

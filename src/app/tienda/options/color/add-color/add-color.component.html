@@ -1,0 +1,48 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="col-md-8 offset-md-2">
+  <br>
+  <br>
+  <card title="Agregar Nuevo Color">
+    <form (ngSubmit)="onSaveColor(f)" #f="ngForm">
+      <div class="row">
+        <div class="offset-md-1 col-md-10">
+          <md-input-container class="md-icon-left">
+            <md-icon>assignment</md-icon>
+            <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="colors.codigo" required>
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-md-1 col-md-10">
+          <md-input-container class="md-icon-left">
+            <md-icon>format_color_fill</md-icon>
+            <input mdInput placeholder="Nombre Color" name="color" id="color" uppercase [(ngModel)]="colors.title" required>
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="offset-md-1 col-md-10">
+          <md-input-container class="md-icon-left">
+            <md-icon>code</md-icon>
+            <input mdInput placeholder="Color Hex Code " name="code" id="code" uppercase [(colorPicker)]="colors.colorCode" [(ngModel)]="colors.colorCode"
+              required>
+          </md-input-container>
+          <md-input-container>
+            <input mdInput [ngStyle]="{'background':colors.colorCode}" readonly/>
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button md-raised-button class="btnCancel" color="warn" type="button" (click)="cancel()"> Cancelar
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!f.valid"> Agregar Color
+          </button>
+        </div>
+      </div>
+    </form>
+  </card>
+</div>

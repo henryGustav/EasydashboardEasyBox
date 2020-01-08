@@ -1,0 +1,50 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<card title="User Detail">
+    <div class="row">
+        <div class="col-md-6">
+            <label>Identificación : </label>&nbsp;{{user.identificacion}}
+            <br/>
+            <label>Nombre : </label>&nbsp;{{user.name}}
+            <br/>
+            <label>No. Celular: </label>&nbsp;{{user.address.celularNumber}}
+            <br/>
+            <label>Email: </label>&nbsp;{{user.email}}
+            <br/>
+            <label>Dirección</label>
+            <br/>
+            <label>Calle Principal:</label>&nbsp; {{user.address.principal_street}}
+            <br/>
+            <label>Calle Secundaria:</label>&nbsp; {{user.address.secondary_street}}
+            <br/>
+            <label>No. Calle</label>&nbsp; {{user.address.homeNumber}}
+            <br/>
+            <label>Fecha de Nacimiento :</label>&nbsp; {{fechaNacimiento |date:'yyyy-MM-dd' }}
+            <br/>
+            <label>Genero :&nbsp;
+                <img class="media-object gender gender-img" *ngIf="user.gender == 'M'" [src]="male">
+                <img class="media-object gender gender-img-girl" *ngIf="user.gender == 'F'" [src]="female">
+            </label>
+        </div><!-- col -->
+        <div class="col-md-6">
+            <div *ngIf="user.imageUrl">
+                <img class="cat-thumb" [src]="user.imageUrl">
+            </div>
+            <div *ngIf="!user.imageUrl">
+                <img class="cat-thumb" [src]="userImage">
+            </div>
+        </div>
+    </div><!--row-->
+    <div class="row" *ngIf="user.roles">
+        <div class="col">
+            <label>Roles :</label>
+            <div class="row sub-cat-row">
+                <div class="badge-title" *ngFor="let rol of user.roles">
+                    <badge [color]="'warning'">
+                        {{rol.nombre}}
+                    </badge>
+                </div>
+            </div>
+        </div>
+    </div>
+</card>

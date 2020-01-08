@@ -1,0 +1,41 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="col-md-8 offset-md-2">
+  <br>
+  <br>
+  <card title="Agregar Nuevo Tamaño">
+    <form (ngSubmit)="onSaveSize(f)" #f="ngForm">
+      <div class="row">
+        <div class="offset-md-1 col-md-10">
+
+          <md-input-container class="md-icon-left">
+            <md-icon>assignment</md-icon>
+            <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="sizes.codigo" required>
+          </md-input-container>
+
+          <md-input-container class="md-icon-left">
+            <md-icon>assignment_late</md-icon>
+            <input mdInput placeholder="Nombre" name="name" id="name" [(ngModel)]="sizes.title" required>
+          </md-input-container>
+
+          <md-input-container class="md-icon-left">
+            <md-icon>assignment_late</md-icon>
+            <input mdInput placeholder=" Nombre Corto" name="sname" id="sname" [(ngModel)]="sizes.sizeShortName" required>
+          </md-input-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button md-raised-button class="btnCancel" color="warn" type="button" (click)="cancel()"> Cancelar
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!f.valid"> Nuevo Tamaño
+          </button>
+        </div>
+      </div>
+
+    </form>
+
+  </card>
+</div>

@@ -1,0 +1,98 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<card [title]="'Ver'" class="mb-0">
+    <md-tab-group>
+        <md-tab>
+            <ng-template md-tab-label>
+                <md-icon color="accent">shopping_basket</md-icon>
+                Producto Información
+            </ng-template>
+            <h3>Producto Información</h3>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4 zoom_img">
+                    <img class="media-object custom-img "
+                         [src]="url" alt="Image"/>
+                </div>
+                <div class="col-md-4 info-div">
+                    <label>Product ID :</label>
+                    {{products._id}}
+                    <br/>
+                    <label>Tienda:</label>
+                    {{products.tienda}}
+                    <br/>
+                    <label>Código:</label>
+                    {{products.codigo}}
+                    <br/>
+                    <label>Nombre :</label>
+                    {{products.title}}
+                    <br/>
+                    <label>Categoría :</label>
+                    {{categoryInfo}}
+                    <br/>
+                    <label>Subcategoría :</label>
+                    {{subCategoryInfo}}
+                    <br/>
+                    <label>Marca :</label>
+                    {{products.brand}}
+                    <br/>
+                    <label>Descripción corta :</label>
+                    {{products.shortDescription}}
+                </div>
+            </div>
+        </md-tab>
+        <md-tab>
+            <ng-template md-tab-label>
+                <md-icon color="accent">crop_original</md-icon>
+                Thumbnails
+            </ng-template>
+            <h4>All Images</h4>
+            <div class="row zoom_img thumb-img-div" *ngIf="isProductImages >= 0 ">
+                <a *ngFor="let url of productImages;let i=index">
+                    <img class="media-object small-thumb"
+                         [src]="url.url" alt="Image"/>
+                </a>
+            </div>
+            <div class="row" *ngIf="isProductImages == 0 ">
+                <h4>No Product Image Found !!!...</h4>
+            </div>
+        </md-tab>
+        <md-tab>
+            <ng-template md-tab-label>
+                <md-icon color="accent">menu</md-icon>
+                Descripción
+            </ng-template>
+            <p [innerHTML]="products.description"></p>
+        </md-tab>
+        <md-tab>
+            <ng-template md-tab-label>
+                <md-icon color="accent">view_comfy</md-icon>
+                Variantes
+            </ng-template>
+            <h5>Características : &nbsp; {{totalVariants}}</h5>
+            <!-- variant Card -->
+            <div class="col-md-3" *ngFor="let item of variantsInfo; let i= index ">
+                <card title="{{products.title}} - Variante {{i+1}}">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label>Tamaño :</label>
+                            {{item.size}}
+                        </div>
+                        <div class="col-md-8">
+                            <label>Color :</label>
+                            {{item.colorName}}
+                        </div>
+                        <div class="col-md-8">
+                            <label>Precio $:</label>
+                            {{item.price}}
+                        </div>
+                        <div class="col-md-8" *ngFor="let imagen of item.thumbnail; let i= index ">
+                            <label>Imagen:</label> &nbsp;&nbsp;&nbsp;
+                            <img class="variant-img" src="{{imagen.url}}">
+                        </div>
+                    </div>
+                </card>
+            </div>
+            <!-- variant card end -->
+        </md-tab>
+    </md-tab-group>
+</card>

@@ -1,0 +1,70 @@
+.custom-progress-bar {
+  margin-top: 17px;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+}
+
+.img-upload-btn {
+  position: absolute;
+  padding: 0;
+  opacity: 0;
+  width: 100%;
+  top: 1px;
+  height: 34px;
+  margin-bottom: 10px;
+}
+
+.btn-upload-cover {
+  //width: 20em;
+  margin-top: 12px;
+  font-size: 13px;
+  height: 2.5em;
+  padding-top: 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.file_input_div {
+  margin: auto;
+  width: 250px;
+  height: 40px;
+}
+
+.file_input {
+  float: left;
+}
+
+#file_input_text_div {
+  width: 200px;
+  margin-top: -8px;
+  margin-left: 5px;
+}
+
+.none {
+  display: none;
+}
+
+.imageFile {
+  margin-left: 315px;
+
+}
+
+.saveButton {
+  float: right;
+  margin-top: 10px;
+}
+
+.btnCancel {
+  float: left;
+  margin-top: 10px;
+}
+
+.custom-img {
+  height: 10em;
+  width: 10em;
+  border-radius: 9px;
+  margin-top: 28px;
+}

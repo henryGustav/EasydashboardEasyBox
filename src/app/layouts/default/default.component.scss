@@ -1,0 +1,153 @@
+@import '../../../assets/sass/variable';
+
+:host {
+  .site-container {
+    .main-content {
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: $navbar-height 0 0 $sidebar-width;
+      transition: padding .2s $animation;
+      @media #{$max991} {
+        padding-left: 0;
+      }
+
+      .main-content-wrap {
+        height: calc(100% - #{$module-rem * 4});
+      }
+    }
+    .app-navbar {
+      transition: left .2s $animation;
+      @media #{$max991} {
+        width: 100%;
+      }
+    }
+    &.open-sidebar {
+      .app-navbar {
+        left: $sidebar-width;
+      }
+      .app-sidebar {
+        left: 0;
+
+        /deep/ .sidebar-overlay {
+          @media #{$max991} {
+            opacity: 1;
+            transition:
+              .2s opacity 0s $animation,
+              0s visibility 0s $animation;
+            visibility: visible;
+          }
+        }
+      }
+    }
+
+    //Boxed
+    &.boxed {
+      box-shadow: 0px 5px 5px 5px rgba(#000,.25);
+      margin: 0 auto;
+      max-width: 1200px;
+      position: relative;
+    }
+
+    //Compress sidebar
+    &.compress-sidebar {
+      @media #{$min992} {
+        .app-navbar {
+          left: $sidebar-compress-width;
+        }
+        .app-sidebar {
+          overflow: hidden;
+          transition: width .2s $animation;
+          width: $sidebar-compress-width;
+          z-index: 9998;
+
+          /deep/ .sidebar-wrap {
+            .app-logo {
+              padding-right: $sidebar-compress-width;
+
+              &:before,
+              &:after {
+                border-width: 15px 20px;
+                border-style: solid;
+                border-color: transparent;
+                content: '';
+                display: block;
+                margin: -15px 0 0;
+                position: absolute;
+                right: ($sidebar-compress-width / 2);
+                top: 50%;
+                transition: transform .2s $animation;
+              }
+              &:before {
+                border-left-color: rgba(main-contrast(700), .5);
+                margin-right: -33px;
+              }
+              &:after {
+                border-right-color: rgba(main-contrast(700), .5);
+                margin-right: -13px;
+                transform: scale(0);
+              }
+              .logo {
+                padding-right: 0;
+              }
+            }
+            .app-menu {
+              .main-menu {
+                > ul {
+                  .menu-item {
+                    &.menu-item-group {
+                      background:rgba(main-contrast(A400), .1);
+                      transition: background .2s $animation;
+                    }
+                    &.has-sub {
+                      &.active {
+                        > .sub {
+                          max-height: 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &:hover,
+          &.show {
+            width: $sidebar-width;
+
+            /deep/ .sidebar-wrap {
+              .app-logo {
+                &:before {
+                  transform: scale(0);
+                }
+                &:after {
+                  transform: scale(1);
+                }
+              }
+              .app-menu {
+                .main-menu {
+                  > ul {
+                    .menu-item {
+                      &.menu-item-group {
+                        background: none;
+                      }
+                      &.has-sub {
+                        &.active {
+                          > .sub {
+                            max-height: 1000px;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .main-content {
+          padding-left: $sidebar-compress-width;
+        }
+      }
+    }
+  }
+}

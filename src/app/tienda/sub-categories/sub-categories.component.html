@@ -1,0 +1,124 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<button md-raised-button color="accent" class="addButton" *ngIf="showUpdate == true" (click)="openAdd()">
+  Agregar
+</button>
+
+<card title="Agregar Sub Categoría" *ngIf="showUpdate == false ">
+  <form (ngSubmit)="onAddSubCategory(f)" #f="ngForm">
+      <div class="row">
+          <div class="col">
+            <md-input-container class="md-icon-left">
+              <md-icon>assignment</md-icon>
+              <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="addSubCategoryData.codigo" required>
+            </md-input-container>
+          </div>
+        </div>
+    <div class="row">
+      <div class="col">
+        <md-input-container class="md-icon-left">
+          <md-icon>local_offer</md-icon>
+          <input mdInput placeholder="Ingrese un Nombre" name="subCatName" uppercase [(ngModel)]="addSubCategoryData.title" required>
+        </md-input-container>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+    <div class="row">
+      <div class="col-md-10">
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
+          <em class="fa fa-check">&nbsp;&nbsp;Crear</em>
+        </button>
+      </div>
+      <!--col-->
+      <div class="col-md-2">
+        <button md-raised-button color="warn" type="button" (click)="clearAddData()">Limpiar</button>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+  </form>
+</card>
+
+<card title="Actualizar Sub Categoría" *ngIf="showUpdate == true ">
+  <form (ngSubmit)="onUpdateSubCategory(g)" #g="ngForm">
+    <div class="row">
+      <div class="col">
+        <md-input-container class="md-icon-left">
+          <md-icon>assignment</md-icon>
+          <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="updateSubCategoryData.codigo" required>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <md-input-container class="md-icon-left">
+          <md-icon>local_offer</md-icon>
+          <input mdInput placeholder="Ingrese un Nombre" name="subCatName" uppercase [(ngModel)]="updateSubCategoryData.title" required>
+        </md-input-container>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+    <div class="row">
+      <div class="col-md-10">
+        <button class="btn btn-success" type="submit">
+          <em class="fa fa-check">&nbsp;&nbsp;Actualizar</em>
+        </button>
+      </div>
+      <!--col-->
+      <div class="col-md-2">
+        <button md-raised-button color="warn" type="button" (click)="closeUpdate()">Cerrar</button>
+      </div>
+      <!--col-->
+    </div>
+    <!--row-->
+  </form>
+</card>
+
+<div class="">
+  <table class="table table-striped" [mfData]="subCategoryData" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+      <tr class="text-center">
+        <th class="text-center">
+          <mfDefaultSorter by="codigo">Código</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="email">Editar</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="age">Eliminar</mfDefaultSorter>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of mf.data ; let i = index">
+        <td class="text-center">{{item.codigo}}</td>
+        <td class="text-center">{{item.title}}</td>
+        <!-- {{item.title}}-->
+
+        <td class="text-center">
+          <button md-mini-fab color="primary" (click)="update(item)">
+            <md-icon>create</md-icon>
+          </button>
+        </td>
+
+        <td class="text-center">
+          <button md-mini-fab color="warn" (click)="onDelete(item._id)">
+            <md-icon>delete</md-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

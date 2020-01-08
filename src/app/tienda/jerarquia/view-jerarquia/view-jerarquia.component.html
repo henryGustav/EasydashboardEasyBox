@@ -1,0 +1,63 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<card title="Detalle">
+  <div class="row">
+    <div class="col-md-6">
+      <label>Nombre : </label>&nbsp;{{user.name}}
+      <br/>
+      <label>No. Teléfono: </label>&nbsp;{{user.address.contactNumber}}
+      <br/>
+    </div>
+    <!-- col -->
+  </div>
+  <!--row-->
+</card>
+
+<div class="">
+  <table class="table table-striped" [mfData]="miembrosData" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+      <tr class="text-center">
+        <th class="text-center">
+          <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="identificacion">Identificación</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="email">Email</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="view">Eliminar</mfDefaultSorter>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor="let item of mf.data">
+        <!--  -->
+        <td class="text-center">{{item.name}}</td>
+        <td class="text-center">{{item.identificacion}}</td>
+        <td class="text-center">{{item.email}}</td>
+        <td>
+          <button md-mini-fab color="accent" (click)="onDeleteMember(item._id)">
+            <md-icon>delete</md-icon>
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="12">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+<div class="row">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+    <button md-raised-button class="saveButton" color="accent" (click)="agregarMiembro()">Agregar Miembro
+    </button>
+  </div>
+</div>

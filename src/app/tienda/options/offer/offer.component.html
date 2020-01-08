@@ -1,0 +1,54 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="text-right">
+    <button md-raised-button color="accent" class="addButton" (click)="addOffer()">
+        Add New Offer
+    </button>
+</div>
+<br>
+<table class="table table-striped" [mfData]="offerData" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+    <tr>
+        <th style="width: 20%" class="text-center">
+            <mfDefaultSorter by="name">Title</mfDefaultSorter>
+        </th>
+        <th style="width: 20%" class="text-center">
+            <mfDefaultSorter by="name">Percentage</mfDefaultSorter>
+        </th>
+        <th style="width: 20%" class="text-center">
+            <mfDefaultSorter by="name">Availability</mfDefaultSorter>
+        </th>
+        <th style="width: 15%" class="text-center">
+            <mfDefaultSorter by="email">Edit</mfDefaultSorter>
+        </th>
+        <th style="width: 15%" class="text-center">
+            <mfDefaultSorter by="age">Delete</mfDefaultSorter>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" *ngFor="let item of mf.data">
+        <td>{{item.title}}</td>
+        <td>{{item.offerPercentage}}</td>
+        <td>{{item.offerAvilable}}</td>
+        <td>
+            <button md-mini-fab color="primary" (click)="editOffer(item._id)">
+                <md-icon>create</md-icon>
+            </button>
+        </td>
+        <td>
+            <button md-mini-fab color="warn" (click)="onDeleteSize(item._id)">
+                <md-icon>delete</md-icon>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+    </tr>
+    </tfoot>
+</table>
+

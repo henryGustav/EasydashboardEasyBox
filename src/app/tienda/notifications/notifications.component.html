@@ -1,0 +1,31 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="custom-spin" *ngIf="loading">
+    <md-progress-spinner mode="indeterminate" color="primary"></md-progress-spinner>
+    <h5 class="loading-text">Cargando...</h5>
+</div>
+
+<div class="custom-spin" *ngIf="arrayLength == 0 ">
+    <img class="custom-img" src="{{url}}">
+    <h5 class="nodata-text"> No existe contenido ... </h5>
+</div>
+
+<div class="custom-spin" *ngIf="errorImg">
+    <img class="custom-img" src="{{errorImage}}">
+    <h5 class="error-text"> No se ha logrado cargar la data !!! </h5>
+</div>
+
+<div class="" *ngFor="let item of notificationData ; let i=index ">
+    <alert style="
+        margin-bottom: -18px;
+    " [outline]="true">
+        <md-icon>add_shopping_cart</md-icon>
+        <strong>Nueva orden recibida !!!</strong>
+        &nbsp; &nbsp;Orden Id : <strong>{{item.orderID}}</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+        Orden Precio : <strong>{{item.priceGrandTotal}}</strong>&nbsp;
+        <a class="view-icon" (click)="onViewOrder(item._id)">
+            <md-icon>visibility</md-icon>
+        </a>
+        <i class="date">{{item.createdAt |date:'short'}}</i>
+    </alert>
+</div>

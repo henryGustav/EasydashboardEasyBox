@@ -1,0 +1,41 @@
+.cat-thumb {
+    height: 150px;
+}
+
+.sub-cat-row {
+    margin-left: 1px;
+}
+
+.badge-title {
+    margin-left: 4px;
+}
+
+.small-thumb {
+    height: 6em;
+    width: 6em;
+    margin-left: 8px;
+    border-radius: 5px;
+    margin-top: 61px;
+}
+
+.custom-img {
+    height: 10em;
+    width: 10em;
+    margin-left: 6px;
+    border-radius: 9px;
+}
+
+.zoom_img img {
+    margin: 30px;
+    height: 100px;
+    width: 100px;
+    -moz-transition: -moz-transform 0.5s ease-in;
+    -webkit-transition: -webkit-transform 0.5s ease-in;
+    -o-transition: -o-transform 0.5s ease-in;
+}
+
+.zoom_img img:hover {
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    -o-transform: scale(2);
+}

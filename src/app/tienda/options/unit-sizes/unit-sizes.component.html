@@ -1,0 +1,85 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+
+<button md-raised-button color="accent" class="addButton" (click)="addUnidad()">Agregar Nueva Unidad</button>
+<!-- <pre> {{categoryData | json}}</pre> -->
+
+<div class="custom-spin" *ngIf="loading">
+  <md-progress-spinner mode="indeterminate" color="primary"></md-progress-spinner>
+  <h5 class="loading-text">Cargando...</h5>
+</div>
+
+<div class="custom-spin" *ngIf="arrayLength == 0 ">
+  <img class="custom-img" src="{{url}}">
+  <h5 class="nodata-text"> No se han ingresado unidades ... </h5>
+</div>
+
+<div class="custom-spin" *ngIf="errorImg">
+  <img class="custom-img" src="{{errorImage}}">
+  <h5 class="error-text"> No se ha podido contactar con el servidor... !!! </h5>
+</div>
+
+<div class="" *ngIf="categoryData.length>0">
+  <table class="table table-striped" [mfData]="categoryData" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+      <tr class="text-center">
+        <th class="text-center">
+          <mfDefaultSorter by="codigo">Código</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="sub-categories">Tamaños</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="estado">Estado</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="view">Ver</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="email">Editar</mfDefaultSorter>
+        </th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor="let item of mf.data; let i = index">
+        <td class="text-center">{{item.codigo}}</td>
+        <td class="text-center">{{item.title}}</td>
+        <td class="text-center">
+          <button md-mini-fab color="accent" (click)="onSubUnidad(item._id)">
+            <md-icon>add</md-icon>
+          </button>
+        </td>
+        <td class="text-center">
+          <button md-mini-fab class="activo" (click)="onInactiveUnidad(item)" *ngIf="item.estado == 1">
+            <md-icon>done</md-icon>
+          </button>
+          <button md-mini-fab class="inactivo" (click)="onActiveUnidad(item)" *ngIf="item.estado == 0">
+            <md-icon>close</md-icon>
+          </button>
+        </td>
+        <td class="text-center">
+          <button md-mini-fab color="primary" (click)="onViewUnidad(item._id)">
+            <md-icon>search</md-icon>
+          </button>
+        </td>
+        <td class="text-center">
+          <button md-mini-fab color="primary" (click)="onEditUnidad(item._id)">
+            <md-icon>create</md-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

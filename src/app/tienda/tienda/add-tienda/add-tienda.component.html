@@ -1,0 +1,83 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="row">
+
+      <card title="Agregar Tienda">
+        <form (ngSubmit)="onSaveTienda(f)" #f="ngForm">
+          <div class="row">
+            <div class="col-md-9 ">
+              <div class="upload-btn-wrapper">
+                <input id="file" class="img-upload-btn" type="file" (change)="readUrl($event)" ng2FileSelect [uploader]="uploader" accept="image/*"
+                />
+                <button class="btn btn-block btn-warning cursor-pointer btn-upload-cover" type="button">
+                  <i class="fa fa-upload"></i>&nbsp;&nbsp; Seleccione una imagen
+                </button>
+              </div>
+              <md-input-container class="md-icon-left">
+                  <md-icon>assignment</md-icon>
+                  <input mdInput placeholder="Código" name="codigo" id="codigo" uppercase [(ngModel)]="tienda.codigo" required>
+                </md-input-container>
+
+                <md-input-container class="md-icon-left">
+                  <md-icon>import_contacts</md-icon>
+                  <input mdInput placeholder="RUC" name="ruc" id="ruc" uppercase [(ngModel)]="tienda.ruc" required>
+                </md-input-container>
+
+                <md-input-container class="md-icon-left">
+                  <md-icon>perm_identity</md-icon>
+                  <input mdInput placeholder="Nombre" name="nombre" id="nombre" uppercase [(ngModel)]="tienda.title" required>
+                </md-input-container>
+
+                <md-input-container class="md-icon-left">
+                  <md-icon>call</md-icon>
+                  <input mdInput placeholder="Teléfono" name="telefono" id="telefono" uppercase [(ngModel)]="tienda.telefono"
+                    required>
+                </md-input-container>
+
+                <md-input-container class="md-icon-left">
+                  <md-icon>phonelink_ring</md-icon>
+                  <input mdInput placeholder="Celular" name="celular" id="celular" uppercase [(ngModel)]="tienda.celular"
+                    required>
+                </md-input-container>
+
+                <md-input-container class="md-icon-left">
+                  <md-icon>email</md-icon>
+                  <input mdInput placeholder="Email" name="email" id="email" uppercase [(ngModel)]="tienda.email" required type="email">
+                </md-input-container>
+
+                <md-input-container class="mb-0">
+                  <textarea mdInput placeholder="Descripción" rows="5" name="shortDescription" id="shortDescription" uppercase
+                    [(ngModel)]="tienda.shortDescription"></textarea>
+                </md-input-container>
+            </div>
+            <div class="col-md-3">
+              <span class="imageFile">
+                <a>
+                  <img class="media-object img-thumbnail custom-img" [src]="url" alt="Image" />
+                </a>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <button md-raised-button class="btnCancel" color="warn" type="button" (click)="cancel()">
+                Cancelar
+              </button>
+            </div>
+            <div class="col-md-6">
+              <button md-raised-button class="saveButton" color="accent" type="submit" [disabled]="!(imageUploaded && f.valid )"> Guardar Tienda
+              </button>
+            </div>
+          </div>
+
+        </form>
+        <div class="custom-progress-bar" *ngIf="progress">
+          <md-progress-bar mode="indeterminate" color="warn"></md-progress-bar>
+        </div>
+      </card>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,154 @@
+<div class="row">
+    <div class="col-md-6 col-xl-3">
+        <card [customBgColor]="'rgba(220,20,60,0.6)'" [customColor]="'#fff'" [bgImage]="'assets/content/card-4.jpg'"
+              class="info-card">
+            <div class="title text-uppercase">ÓRDENES</div>
+            <div class="count">{{staticsCounts.ordercount}}</div>
+        </card>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <card [customBgColor]="'rgba(255,140,0,0.9)'" [customColor]="'#fff'" [bgImage]="'assets/content/card-5.jpg'"
+              class="info-card">
+            <div class="title text-uppercase">PRODUCTOS</div>
+            <div class="count"> {{staticsCounts.productcount}}</div>
+        </card>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <card [customBgColor]="'rgba(0,191,252,0.9)'" [customColor]="'#fff'" [bgImage]="'assets/content/card-6.jpg'"
+              class="info-card">
+            <div class="title text-uppercase">VENTAS</div>
+            <div class="count">$ {{staticsCounts.revenue}}</div>
+        </card>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <card [customBgColor]="'rgba(0,128,0,0.8)'" [customColor]="'#fff'" [bgImage]="'assets/content/card-7.jpg'"
+              class="info-card">
+            <div class="title text-uppercase">Categorías</div>
+            <div class="count">{{staticsCounts.categorycount}}</div>
+        </card>
+    </div>
+</div>
+
+<div class="row mb-lg-4">
+    <!-- <div class="col-lg-6 map-col mb-4 mb-lg-0">
+      <card [indents]="0" class="mb-0">
+        <div id="map"></div>
+      </card>
+    </div> -->
+    <div class="col-lg-12 mb-4 mb-lg-0 custom-spin" *ngIf="loading == 0 ">
+        <md-progress-spinner mode="indeterminate" color="primary"></md-progress-spinner>
+        <h5 class="loading-text">Cargando...</h5>
+    </div>
+
+    <div class="col-lg-12 mb-4 mb-lg-0 custom-spin" *ngIf="arrayLength == 0 ">
+        <img class="custom-img" src="{{url}}">
+        <h5 class="nodata-text"> No existe contenido ... </h5>
+    </div>
+
+    <div class="col-lg-12 mb-4 mb-lg-0 custom-spin" *ngIf="loading == 2">
+        <img class="custom-img" src="{{errorImage}}">
+        <h5 class="error-text"> No se ha podido recargar los recursos... !!! </h5>
+    </div>
+
+
+    <div class="col-lg-6 mb-4 mb-lg-0" *ngIf="loading == 1" style="display: block">
+        <card class="mb-lg-0">
+            <canvas  width="150" height="100"
+                    baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [colors]="lineChartColors"
+                    [chartType]="barChartType"></canvas>
+        </card>
+    </div>
+    <div class="col-lg-6 mb-4 mb-lg-0" *ngIf="loading == 1">
+      <card class="mb-lg-0">
+          <canvas  width="150" height="100"
+          baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [colors]="pieChartColors"
+          [chartType]="pieChartType"></canvas>
+      </card>
+  </div>
+</div>
+
+<table class="table table-striped" [mfData]="recentOrders" #mf="mfDataTable" [mfRowsOnPage]="10">
+    <thead>
+    <tr>
+        <th class="text-center">
+            <mfDefaultSorter by="_id"># Orden</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="user.name">Empresario</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="createdAt">Fecha Pedido</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="grandTotal">Total</mfDefaultSorter>
+      </th>
+        <th class="text-center">
+            <mfDefaultSorter by="status">Estado</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="email">Ver</mfDefaultSorter>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" *ngFor="let item of mf.data">
+        <td>{{item._id}}</td>
+        <td>{{item.user.name}}</td>
+        <td>{{item.createdAt}}</td>
+        <td>{{item.grandTotal}}</td>
+        <td>
+            <badge [color]="'success'" *ngIf="item.status == '4'">
+               ENTREGADA
+            </badge>
+            <badge [color]="'info'" *ngIf="item.status == '3'">
+                DESPACHADA
+            </badge>
+            <badge [color]="'warning'" *ngIf="item.status == '2'">
+                PENDIENTE
+            </badge>
+            <badge [color]="'danger'" *ngIf="item.status == '5'">
+                CANCELADA
+            </badge>
+            <badge [color]="'warning'" *ngIf="item.status == '1'">
+                    INGRESADA
+                  </badge>
+        </td>
+        <td>
+            <button md-mini-fab color="primary" (click)="viewOrder(item._id)">
+                <md-icon>search</md-icon>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="6">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+    </tr>
+    </tfoot>
+</table>
+
+<!-- Recent ten orders -->
+<!-- <ngx-datatable
+  class="material"
+  [rows]="tableRows"
+  [columns]="tableColumns"
+  [headerHeight]="'auto'"
+  [rowHeight]="'auto'"
+  [columnMode]="'force'"
+  [limit]="10"
+  [loadingIndicator]="loadingIndicator"
+  [footerHeight]="50">
+</ngx-datatable> -->

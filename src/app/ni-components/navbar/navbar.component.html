@@ -1,0 +1,191 @@
+<div class="navbar-wrap">
+  <div class="navbar-button" [ngClass]="{ 'open' : openedSidebar }" (click)="openSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <h1 class="page-title">{{ title }}</h1>
+
+  <div class="nav-items">
+    <div class="nav-item" [ngClass]="{ 'opened' : false }">
+      <button md-icon-button (click)="open($event)">
+        <md-icon>
+          notifications_none
+          <badge *ngIf="unread >'0' " [color]="'danger'">{{unread}}</badge>
+        </md-icon>
+      </button>
+
+      <div class="dropdown-menu">
+        <h4 class="menu-title">Ordenes Recientes</h4>
+         <ul>
+          <li *ngFor="let notify of orderNotify">
+            <a *ngIf="notify.readNotification == false" >
+              <md-icon>add_shopping_cart</md-icon>
+              <div class="content">
+                <span class="desc">Nueva Orden generada <strong></strong></span>
+                <span class="desc">Orden {{notify.orderID}}</span>
+                <span class="date">Precio ${{notify.priceGrandTotal}}</span>
+              </div>
+              <div class="col">
+              <button md-mini-fab color="primary" id="readNavigate"
+              (click)="readNavigate(notify._id,notify.order)">
+              <md-icon>visibility</md-icon></button>
+              <button md-mini-fab color="warn" id="readNotNavigate"
+              (click)="readNotNavigate(notify._id)">
+              <md-icon>visibility_off</md-icon></button>
+              </div>
+            </a>
+
+            <a *ngIf="notify.readNotification == true" >
+              <md-icon>add_shopping_cart</md-icon>
+              <div class="content">
+                <span class="desc">Nueva Orden generada <strong></strong></span>
+                <span class="desc">Orden {{notify.orderID}}</span>
+                <span class="date">Precio ${{notify.priceGrandTotal}}</span>
+              </div>
+              <div class="col btn-read">
+              <button md-mini-fab color="primary" id="readNavigate"
+              (click)="readNavigate(notify._id,notify.order)">
+              <md-icon>visibility</md-icon></button>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+        <div class="menu-footer">
+          <a class="cursor" (click)="readAllNotification()">Ver todas las notificaciones</a>
+        </div>
+      </div>
+    </div>
+
+<!--     <div class="nav-item" [ngClass]="{ 'opened' : false }">
+      <button md-icon-button (click)="open($event)">
+        <md-icon>
+          event
+          <div class="marker"></div>
+        </md-icon>
+      </button>
+
+      <div class="dropdown-menu">
+        <h4 class="menu-title">Events</h4>
+
+        <ul>
+          <li>
+            <a href="#">
+              <md-icon>android</md-icon>
+              <div class="content">
+                <span class="desc">This is a new message for my dear friend <strong>Rob</strong>.</span>
+                <span class="date">2 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <md-icon>free_breakfast</md-icon>
+              <div class="content">
+                <span class="desc">This is a new message for my dear friend <strong>Rob</strong>.</span>
+                <span class="date">14 minutes ago</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <md-icon>mood</md-icon>
+              <div class="content">
+                <span class="desc">This is a new message for my dear friend <strong>Rob</strong>.</span>
+                <span class="date">15 minutes ago</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+        <div class="menu-footer">
+          <a href="#">View all events</a>
+        </div>
+      </div>
+    </div> -->
+
+<!--     <div class="nav-item" [ngClass]="{ 'opened' : false }">
+      <button md-icon-button (click)="open($event)">
+        <md-icon>chat_bubble_outline</md-icon>
+      </button>
+
+      <div class="dropdown-menu">
+        <h4 class="menu-title">You have 3 new messages</h4>
+
+        <ul>
+          <li>
+            <a href="#">
+              <img class="avatar" src="assets/content/avatar-1.jpg" width="42" height="42" alt="">
+
+              <div class="content">
+                <span class="meta">
+                  <strong class="name">Victor Jara</strong>
+                  <span class="date">3 Apr</span>
+                </span>
+                <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab, odio.</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img class="avatar" src="assets/content/avatar-4.jpg" width="42" height="42" alt="">
+              <div class="content">
+                <span class="meta">
+                  <strong class="name">Nancy Allen</strong>
+                  <span class="date">2 Apr</span>
+                </span>
+                <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img class="avatar" src="assets/content/avatar-3.jpg" width="42" height="42" alt="">
+              <div class="content">
+                <span class="meta">
+                  <strong class="name">Emma Watson</strong>
+                  <span class="date">1 Apr</span>
+                </span>
+                <span class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing.</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+
+    <div class="nav-item" [ngClass]="{ 'opened' : false }">
+      <button md-button (click)="open($event)">
+        <div class="avatar"><img src="assets/content/administrator.png" width="40" height="40" alt=""></div>
+        <div class="name">Administrador</div>
+      </button>
+
+      <div class="dropdown-menu mini-menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/profile/my-profile']"><i class="fa fa-home"></i> Mi Cuenta</a>
+          </li>
+          <!-- <li>
+            <a href="#"><i class="fa fa-user-o"></i> Profile</a>
+          </li> -->
+          <!-- <li>
+            <a href="#" routerLink="/default-layout/calendar"><i class="fa fa-calendar"></i> Calendar</a>
+          </li> -->
+          <li>
+            <a  [routerLink]="['/profile/setting']"><i class="fa fa-cogs"></i> Ajustes</a>
+          </li>
+          <li>
+            <a class="cursor" (click)="logout()"><i class="fa fa-sign-out"></i> Salir</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="items-overlay" (click)="close($event)"></div>
+  </div>
+</div>

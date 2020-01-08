@@ -1,0 +1,73 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="text-right">
+    <button md-raised-button color="accent" class="addButton" (click)="addVariant()">Agregar Característica</button>
+</div>
+<br>
+<table class="table table-striped" [mfData]="productsVariant" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+    <tr>
+        <th class="text-center">
+            <mfDefaultSorter by="colorName">Color</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="size">Tamaño</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="price">Precio $</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="stock">En Stock</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="enable">Estado</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="view">Ver</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="email">Editar</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+            <mfDefaultSorter by="age">Activar/Desactivar</mfDefaultSorter>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-center" *ngFor="let item of mf.data;let i = index">
+        <td>{{item.colorName}}</td>
+        <td>{{item.size}}</td>
+        <td>$ {{item.price}}</td>
+        <td>{{item.stock}}</td>
+        <td *ngIf="item.enable == true">Habilitado</td>
+        <td *ngIf="item.enable == false">Deshabilitado</td>
+        <td class="text-center">
+            <button md-mini-fab color="accent" (click)="onViewVariant(item._id)">
+                <md-icon>search</md-icon>
+            </button>
+        </td>
+
+        <td class="text-center">
+            <button md-mini-fab color="primary" (click)="onEditVariant(item._id,i)">
+                <md-icon>create</md-icon>
+            </button>
+        </td>
+
+        <td class="text-center">
+            <button md-mini-fab class="activo" (click)="onDisableVariant(item._id,i)" *ngIf="item.enable == true">
+                    <md-icon>done</md-icon>
+                  </button>
+                  <button md-mini-fab class="inactivo" (click)="onDisableVariant(item._id,i)" *ngIf="item.enable == false">
+                    <md-icon>close</md-icon>
+                  </button>
+        </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="12">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+    </tr>
+    </tfoot>
+</table>

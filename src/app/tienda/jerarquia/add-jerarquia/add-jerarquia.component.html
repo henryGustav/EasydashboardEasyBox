@@ -1,0 +1,39 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+
+<div class="">
+  <table class="table table-striped" [mfData]="miembrosDisponibles" #mf="mfDataTable" [mfRowsOnPage]="5">
+    <thead>
+      <tr class="text-center">
+        <th class="text-center">
+          <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="identificacion">Identificación</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter by="add">Agregar</mfDefaultSorter>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor="let item of mf.data">
+        <!--  -->
+        <td class="text-center">{{item.name}}</td>
+        <td class="text-center">{{item.identificacion}}</td>
+        <td class="text-center">
+          <button md-mini-fab color="primary" (click)="onAddMember(item._id)">
+            <md-icon>add</md-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="12">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

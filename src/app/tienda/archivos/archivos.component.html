@@ -1,0 +1,75 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<card title="Importar Productos">
+  <form (ngSubmit)="onUploadArchivo(f)" #f="ngForm">
+    <div class="row">
+      <div class="col-md-4 ">
+        <div class="upload-btn-wrapper">
+          <input id="file" class="img-upload-btn" type="file"  ng2FileSelect [uploader]="uploader" accept=".xls,.xlsx"
+          />
+          <button class="btn btn-block btn-warning cursor-pointer btn-upload-cover" type="button">
+            <i class="fa fa-upload"></i>&nbsp;&nbsp; Seleccione un archivo
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <span class="imageFile">
+          <a>
+
+          </a>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-9" style="margin-bottom: 40px">
+
+      <h3>Archivos a subir</h3>
+      <p>Archivos en cola: {{ uploader?.queue?.length }}</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="50%">Nombre</th>
+            <th>Size</th>
+            <th>Progreso</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of uploader.queue">
+            <td>
+              <strong>{{ item?.file?.name }}</strong>
+            </td>
+            <td  nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+            <td>
+              <div class="progress" style="margin-bottom: 0;">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+              </div>
+            </td>
+            <td class="text-center">
+              <span *ngIf="item.isSuccess">
+                <i class="glyphicon glyphicon-ok"></i>
+              </span>
+              <span *ngIf="item.isCancel">
+                <i class="glyphicon glyphicon-ban-circle"></i>
+              </span>
+              <span *ngIf="item.isError">
+                <i class="glyphicon glyphicon-remove"></i>
+              </span>
+            </td>
+            <td nowrap>
+              <button type="button" class="btn btn-success btn-xs" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                <span class="glyphicon glyphicon-upload"></span> Procesar
+              </button>
+              <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()" [disabled]="!item.isUploading">
+                <span class="glyphicon glyphicon-ban-circle"></span> Cancelar
+              </button>
+              <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                <span class="glyphicon glyphicon-trash"></span> Limpiar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+  </form>
+</card>

@@ -1,0 +1,54 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="col-md-10">
+    <card title="Ver Característica">
+
+        <h5>Producto Característica</h5>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>Producto :</label>
+                <label>{{variantData.productName}}</label>
+            </div>
+        </div>
+        <h5>Característica Información</h5>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>Código SKU :</label>
+                {{variantData.sku}}
+            </div>
+            <div class="col-md-6">
+                <label>Precio :</label>
+                {{variantData.price}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Color :</label>
+                {{variantData.colorName}}
+            </div>
+            <div class="col-md-6">
+                <label>Tamaño :</label>
+                {{variantData.size}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Stock (Cantidad) :</label>
+                {{variantData.stock}}
+            </div>
+            <div class="col-md-6">
+                <label>Creado En :</label>
+                {{fecha|date:'yyyy-MM-dd'}}
+            </div>
+        </div>
+        <h5>Imagénes</h5>
+        <div class="row zoom_img">
+            <a *ngFor="let url of variantData.thumbnail;let i=index">
+                <img class="media-object custom-img "
+                     [src]="url.url" alt="Image"/>
+            </a>
+        </div>
+    </card>
+</div>

@@ -1,0 +1,51 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<div class="text-right">
+  <button md-raised-button color="accent" class="addButton" (click)="addTax()">Agregar Nuevo Impuesto</button>
+</div>
+<br>
+<table class="table table-striped" [mfData]="taxData" #mf="mfDataTable" [mfRowsOnPage]="5">
+  <thead>
+    <tr>
+      <th class="text-center">
+        <mfDefaultSorter by="name">Nombre</mfDefaultSorter>
+      </th>
+      <th style="width: 20%" class="text-center">
+        <mfDefaultSorter by="codigo">Codigo</mfDefaultSorter>
+      </th>
+      <th style="width: 20%" class="text-center">
+        <mfDefaultSorter by="porcentaje">Porcentaje</mfDefaultSorter>
+      </th>
+      <th class="text-center">
+        <mfDefaultSorter by="email">Editar</mfDefaultSorter>
+      </th>
+      <th class="text-center">
+        <mfDefaultSorter by="age">Eliminar</mfDefaultSorter>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center" *ngFor="let item of mf.data">
+      <td>{{item.title}}</td>
+      <td>{{item.codigo}}</td>
+      <td>{{item.porcentaje}}</td>
+      <td>
+        <button md-mini-fab color="primary" (click)="editTax(item._id)">
+          <md-icon>create</md-icon>
+        </button>
+      </td>
+      <td>
+        <button md-mini-fab color="warn" (click)="onDeleteTax(item._id)">
+          <md-icon>delete</md-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+  </tfoot>
+</table>

@@ -1,0 +1,48 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+<card title="Mi Perfil">
+  <form (ngSubmit)="onUpdateInfo(f)" #f="ngForm">
+    <div class="row">
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>edit</md-icon>
+          <input mdInput placeholder="Name" name="name" id="name" [(ngModel)]="myInfo.name" readonly>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <md-input-container class="md-icon-left">
+          <md-icon>mail</md-icon>
+          <input mdInput placeholder="Email" name="email" id="email" [(ngModel)]="myInfo.email" readonly>
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6  ">
+        <md-input-container class="md-icon-left">
+          <md-icon>event</md-icon>
+          <input mdInput placeholder="Birth Date (DD/MM/YYYY)" name="birthDate" id="birthDate" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
+          readonly [(ngModel)]="myInfo.birthDate">
+        </md-input-container>
+      </div>
+    </div>
+    <div class="row gender-row">
+      <label class="gender-label">Género</label>
+
+      <md-radio-group name="ngModel-options" [(ngModel)]="myInfo.gender" class="mat-radio-group custom-radio">
+        <md-radio-button value="M" disabled>
+          <img class="media-object gender-img" [src]="male" alt="Image" />
+        </md-radio-button>
+        <md-radio-button value="F" disabled >
+          <img class="media-object gender-img-girl" [src]="female" alt="Image" />
+        </md-radio-button>
+      </md-radio-group>
+    </div>
+    <div class="row select">
+        <div class="col-md-6">
+          <button md-raised-button class="btnCancel" color="success" type="button" (click)="cancel()"> Regresar
+          </button>
+        </div>
+      </div>
+  </form>
+</card>

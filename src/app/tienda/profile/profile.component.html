@@ -1,0 +1,75 @@
+<breadcrumb [menu]="breadcrumbIcon" [style]="'custom2'"></breadcrumb>
+
+<card [title]="'Setting'" class="mb-0">
+    <md-tab-group>
+        <md-tab>
+            <ng-template md-tab-label>
+                <md-icon color="accent">build</md-icon>
+                Actualizar Password
+            </ng-template>
+            <h4>Cambiar Password</h4>
+            <!-- Update Password Form Start -->
+            <form (ngSubmit)="onUpdatePassword(f)" #f="ngForm">
+                <div class="row">
+                    <div class="offset-md-1 col-md-10">
+                        <md-input-container class="md-icon-left">
+                            <md-icon>edit</md-icon>
+                            <input mdInput placeholder="Old Password" type="password" name="oldPassword"
+                                   id="oldPassword"
+                                   [(ngModel)]="password.nombre">
+                        </md-input-container>
+                        <md-input-container class="md-icon-left">
+                            <md-icon>done</md-icon>
+                            <input mdInput placeholder="New Password" type="password" name="newPassword"
+                                   id="newPassword"
+                                   [(ngModel)]="password.password">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button md-raised-button class="btnCancel" color="warn" type="button"
+                                (click)="cancel()"> Cancelar
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button md-raised-button class="saveButton" color="accent" type="submit"> Actualizar
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- form End -->
+        </md-tab>
+        <md-tab>
+            <ng-template md-tab-label>
+                <md-icon color="accent">tap_and_play</md-icon>
+                Actualizar Email
+            </ng-template>
+            <h4>Update Email</h4>
+            <!-- Update Email -->
+            <form (ngSubmit)="onUpdateEmail(f)" #f="ngForm">
+                <div class="row">
+                    <div class="offset-md-1 col-md-10">
+                        <md-input-container class="md-icon-left">
+                            <md-icon>edit</md-icon>
+                            <input mdInput placeholder="Actualizar email..." type="email" name="newEmail" id="newEmail"
+                                   [(ngModel)]="updateEmail.email">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <button md-raised-button class="btnCancel" color="warn" type="button"
+                                (click)="cancel()"> Cancelar
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button md-raised-button class="saveButton" color="accent" type="submit"> Actualizar
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- form End -->
+        </md-tab>
+    </md-tab-group>
+</card>
